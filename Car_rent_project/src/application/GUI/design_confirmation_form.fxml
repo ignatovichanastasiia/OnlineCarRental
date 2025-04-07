@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutX="6.0" layoutY="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0">
+        <content>
+          <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
+               <children>
+                  <TextArea layoutX="-24.0" layoutY="-24.0" minHeight="320.0" minWidth="570.0" prefWidth="570.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" fx:id="contractText" editable="false"
+          wrapText="true" focusTraversable="false" text="Here goes the text of the agreement or terms and conditions. The user should read this before proceeding."/>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <ButtonBar layoutX="6.0" layoutY="349.0" prefHeight="47.0" prefWidth="588.0">
+         <buttons>
+            <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="325.0" text="I haven't read or don't argee. " />
+            <CheckBox mnemonicParsing="false" prefHeight="18.0" prefWidth="325.0" text="I have read everything, understood and argee. " textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" />
+         </buttons>
+      </ButtonBar>
+      <ToolBar id="confirm_buttons" layoutY="546.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <items>
+            <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="50.0" mnemonicParsing="false" prefWidth="90.0" text="Next" />
+          <Button alignment="CENTER" contentDisplay="RIGHT" minWidth="50.0" mnemonicParsing="false" prefWidth="90.0" text="Back" />
+        </items>
+      </ToolBar>
+   </children>
+</AnchorPane>

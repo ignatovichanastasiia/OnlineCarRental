@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -25,7 +25,7 @@
                   <TextField layoutX="79.0" layoutY="186.0" prefHeight="26.0" prefWidth="171.0" />
                   <Label layoutX="303.0" layoutY="87.0" text="Last name" />
                   <Label layoutX="16.0" layoutY="158.0" text="E-mail" />
-                  <Label layoutX="15.0" layoutY="14.0" text="Label" />
+                  <Label layoutX="15.0" layoutY="14.0" text="Card insert" />
                   <Label layoutX="358.0" layoutY="187.0" prefHeight="18.0" prefWidth="17.0" text="(">
                      <font>
                         <Font size="14.0" />
@@ -52,18 +52,19 @@
                         <Label layoutX="65.0" layoutY="68.0" prefHeight="18.0" prefWidth="152.0" text="CVV" />
                         <Label layoutX="232.0" layoutY="68.0" prefHeight="18.0" prefWidth="274.0" text="Cardholder name" />
                         <TextField layoutX="232.0" layoutY="88.0" prefHeight="26.0" prefWidth="275.0" />
-                        <ChoiceBox layoutX="367.0" layoutY="40.0" prefHeight="26.0" prefWidth="38.0" />
-                        <ChoiceBox layoutX="421.0" layoutY="40.0" prefHeight="26.0" prefWidth="86.0" />
+                        <ChoiceBox layoutX="367.0" layoutY="40.0" prefHeight="24.0" prefWidth="38.0" />
+                        <ChoiceBox layoutX="421.0" layoutY="40.0" prefHeight="24.0" prefWidth="82.0" />
                         <Label layoutX="405.0" layoutY="44.0" prefHeight="18.0" prefWidth="16.0" text=" /" />
                      </children>
                   </AnchorPane>
-                  <MenuButton layoutX="15.0" layoutY="45.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" text="MenuButton">
+                  <MenuButton layoutX="15.0" layoutY="44.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="70.0" text="Mr">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Action 1" />
                       <MenuItem mnemonicParsing="false" text="Action 2" />
                     </items>
                   </MenuButton>
                   <Label layoutX="294.0" layoutY="191.0" prefHeight="18.0" prefWidth="13.0" text="+" />
+                  <Button layoutX="248.0" layoutY="44.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="310.0" text="Add card" />
                </children>
             </AnchorPane>
         </content>
