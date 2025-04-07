@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Accordion maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Accordion fx:id="accordion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.GUIController">
   <panes>
     <TitledPane animated="false" text="filters">
          <content>
@@ -67,7 +67,7 @@
             </GridPane>
          </content>
     </TitledPane>
-    <TitledPane animated="false" text="cars">
+    <TitledPane fx:id="carsPane" animated="false" text="cars">
       <content>
         <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                <children>
