@@ -16,13 +16,19 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="397.0" prefWidth="580.0">
                <children>
-                  <TextField layoutX="15.0" layoutY="185.0" prefHeight="26.0" prefWidth="48.0" />
+                  <MenuButton layoutX="15.0" layoutY="44.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="70.0" text="Mr">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
                   <TextField layoutX="14.0" layoutY="115.0" prefHeight="26.0" prefWidth="234.0" />
                   <TextField layoutX="301.0" layoutY="115.0" prefHeight="26.0" prefWidth="258.0" />
+                  <TextField layoutX="15.0" layoutY="185.0" prefHeight="26.0" prefWidth="48.0" />
+                  <TextField layoutX="79.0" layoutY="186.0" prefHeight="26.0" prefWidth="171.0" />
                   <TextField layoutX="307.0" layoutY="185.0" prefHeight="26.0" prefWidth="46.0" />
                   <TextField layoutX="371.0" layoutY="185.0" prefHeight="26.0" prefWidth="46.0" />
                   <TextField layoutX="435.0" layoutY="185.0" prefHeight="26.0" prefWidth="123.0" />
-                  <TextField layoutX="79.0" layoutY="186.0" prefHeight="26.0" prefWidth="171.0" />
                   <Label layoutX="303.0" layoutY="87.0" text="Last name" />
                   <Label layoutX="16.0" layoutY="158.0" text="E-mail" />
                   <Label layoutX="15.0" layoutY="14.0" text="Card insert" />
@@ -54,15 +60,9 @@
                         <TextField layoutX="232.0" layoutY="88.0" prefHeight="26.0" prefWidth="275.0" />
                         <ChoiceBox layoutX="367.0" layoutY="40.0" prefHeight="24.0" prefWidth="38.0" />
                         <ChoiceBox layoutX="421.0" layoutY="40.0" prefHeight="24.0" prefWidth="82.0" />
-                        <Label layoutX="405.0" layoutY="44.0" prefHeight="18.0" prefWidth="16.0" text=" /" />
+                        <Label layoutX="407.0" layoutY="44.0" prefHeight="18.0" prefWidth="16.0" text=" /" />
                      </children>
                   </AnchorPane>
-                  <MenuButton layoutX="15.0" layoutY="44.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="70.0" text="Mr">
-                    <items>
-                      <MenuItem mnemonicParsing="false" text="Action 1" />
-                      <MenuItem mnemonicParsing="false" text="Action 2" />
-                    </items>
-                  </MenuButton>
                   <Label layoutX="294.0" layoutY="191.0" prefHeight="18.0" prefWidth="13.0" text="+" />
                   <Button layoutX="248.0" layoutY="44.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="310.0" text="Add card" />
                </children>
