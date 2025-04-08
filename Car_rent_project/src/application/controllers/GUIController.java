@@ -15,6 +15,6 @@ public class GUIController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        accordion.setExpandedPane(carsPane);
+//        accordion.setExpandedPane(carsPane);
     }
 }

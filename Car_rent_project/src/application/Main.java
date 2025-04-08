@@ -3,6 +3,7 @@ package application;
 import application.GUI.CarSelectionForm;
 import application.GUI.ClientForm;
 import application.GUI.ConfirmationForm;
+import application.GUI.DriversLicenseForm;
 import application.GUI.RentalSummaryForm;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -16,10 +17,11 @@ public class Main extends Application {
 			ClientForm cliF = new ClientForm();
 			ConfirmationForm confF = new ConfirmationForm();
 			RentalSummaryForm rentSF = new RentalSummaryForm();
-			csF.startCarSelectionForm(primaryStage);
-//			cliF.startClientForm(primaryStage);
+			DriversLicenseForm drivLF = new DriversLicenseForm();
+//			csF.startCarSelectionForm(primaryStage);
+//			cliF.startClientForm(primaryStage); 
 //			confF.startConfirmationForm(primaryStage);
-//			rentSF.startRentalSummaryForm(primaryStage);
+//			rentSF.startRentalSummaryForm(primaryStage); 
 		} catch(Exception e) {
 			System.out.println("Problems with start-methods: "+e.getMessage());
 		}
