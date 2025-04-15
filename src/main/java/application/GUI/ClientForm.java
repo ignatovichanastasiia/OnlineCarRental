@@ -1,5 +1,6 @@
 package application.GUI;
 
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -26,5 +27,6 @@ public class ClientForm {
 			System.out.println("Problem with window \"client form\": " + e.getMessage());
 		}
 	}
+
 
 }
