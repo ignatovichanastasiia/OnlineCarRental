@@ -41,3 +41,4 @@ public class ClientService {
         System.out.println("Клиент удалён (ID: " + clientId + ")");
     }
 }
+
