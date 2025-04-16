@@ -1,11 +1,13 @@
 package application.controllers;
 
+import java.awt.Button;
 import java.util.Arrays;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -54,9 +56,35 @@ public class CarSelectionFormController {
 	
 	//cars
 	@FXML
-	private ListView cars;
+	private ListView carsList;
 	
-	//
+	//extra services
+	@FXML
+	private CheckBox insurance;
+	
+	@FXML
+	private CheckBox GPS;
+	
+	@FXML
+	private CheckBox child;
+	
+	@FXML
+	private CheckBox moreDriver;
+	
+	@FXML
+	private CheckBox wifi;
+	
+	@FXML
+	private CheckBox crossborder;
+	
+	@FXML
+	private CheckBox tank;
+	
+	@FXML
+	private CheckBox snow;
+	
+	@FXML
+	private Button complete;
 	
 	@FXML
 	private void initialize() {
@@ -77,8 +105,8 @@ public class CarSelectionFormController {
 		ObservableList<String> brandLastItems = FXCollections.observableArrayList(brands2);
 		brand2.setItems(brandLastItems);
 		brand3.setItems(brandLastItems);
-		cars = new ListView<>();
-		cars.setItems(FXCollections.observableArrayList("Wait cars..."));
+		carsList = new ListView<>();
+		carsList.setItems(FXCollections.observableArrayList("Wait cars..."));
 	}
 	
 }
