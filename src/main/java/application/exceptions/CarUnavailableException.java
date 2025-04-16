@@ -1,4 +1,4 @@
-package src.main.java.application.exeptions;
+package application.exceptions;
 
 public class CarUnavailableException {
 

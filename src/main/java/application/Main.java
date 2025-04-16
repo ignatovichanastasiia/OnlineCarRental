@@ -18,7 +18,7 @@ public class Main extends Application {
 			ConfirmationForm confF = new ConfirmationForm();
 			RentalSummaryForm rentSF = new RentalSummaryForm();
 			DriversLicenseForm drivLF = new DriversLicenseForm();
-//			csF.startCarSelectionForm(primaryStage);
+			csF.startCarSelectionForm(primaryStage);
 //			cliF.startClientForm(primaryStage); 
 //			confF.startConfirmationForm(primaryStage);
 //			rentSF.startRentalSummaryForm(primaryStage); 

@@ -1,10 +1,11 @@
 package application.models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class Rental implements Serializable {
 	private static final long serialVersionUID = 1L; // Версия класса для сериализации
-	
+	private static int ID_COUNTER = 0;
     private static int counter = 0;
     private int id;
     private Client client;
@@ -17,7 +18,7 @@ public class Rental implements Serializable {
     public Rental(Client client, Car car, Date rentalStartDate, Date rentalEndDate,
                   String pickUpLocation, String deliveryLocation) {
         this.id = getClass().getSimpleName().charAt(0)
-				+ "-" + "0".repeat(nullsNumber(idCounter)) 
+//				+ "-" + "0".repeat(nullsNumber(idCounter)) 
 				+ ID_COUNTER++;
         this.client = client;
         this.car = car;
@@ -27,7 +28,7 @@ public class Rental implements Serializable {
         this.deliveryLocation = deliveryLocation;
     }
     
-    // Геттеры и сеттеры
+    // getters and setters
     public int getId() { 
     	return id; 
     	}
@@ -88,6 +89,7 @@ public class Rental implements Serializable {
         } else {
             return 0;
         }
+    }
         
     
     @Override
@@ -95,7 +97,7 @@ public class Rental implements Serializable {
         return "Rental{" +
                "id=" + id +
                ", client=" + client.getName() +
-               ", car=" + car.getMake() + " " + car.getModel() +
+               ", car=" + car.getModel() +
                ", rentalStartDate=" + rentalStartDate +
                ", rentalEndDate=" + rentalEndDate +
                "}";

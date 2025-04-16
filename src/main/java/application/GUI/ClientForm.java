@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 public class ClientForm {
 	public void startClientForm(Stage primaryStage) {
 		try {
-			URL fxmlUrl = getClass().getResource("design_client_form.fxml");
+			URL fxmlUrl = getClass().getResource("/design_client_form.fxml");
 			System.out.println("FXML URL: " + fxmlUrl);
 			Parent root = FXMLLoader.load(fxmlUrl);
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Car rent app");
-			Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+			Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
 			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();

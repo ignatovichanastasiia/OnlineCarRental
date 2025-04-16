@@ -1,8 +1,10 @@
 package application.models;
 
+import java.io.Serializable;
+
 public class Car implements Serializable {
 	private static final long serialVersionUID = 1L; // Версия класса для сериализации
-
+	private static int ID_COUNTER = 0;
     private static int counter = 0;
     private int id;
     private String brand;
@@ -13,7 +15,7 @@ public class Car implements Serializable {
     
     public Car(String brand, String model, int year, double dailyPrice) {
         this.id = getClass().getSimpleName().charAt(0)
-				+ "-" + "0".repeat(nullsNumber(idCounter)) 
+//				+ "-" + "0".repeat(nullsNumber(idCounter)) 
 				+ ID_COUNTER++;
         this.brand = brand;
         this.model = model;
@@ -83,11 +85,13 @@ public class Car implements Serializable {
         } else {
             return 0;
         }
-        
-    
-    @Override
-    public String toString() {
-        return "Car{" + "id=" + id + ", make=" + make + ", model=" + model +
-               ", year=" + year + ", dailyPrice=" + dailyPrice + ", isAvailable=" + isAvailable + "}";
     }
+
+	@Override
+	public String toString() {
+		return "Car [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", dailyPrice="
+				+ dailyPrice + ", isAvailable=" + isAvailable + "]";
+	}
+    
+    
 }

@@ -1,5 +1,7 @@
 package application.models;
 
+import java.io.Serializable;
+
 public class Client implements Serializable {
 	private static final long serialVersionUID = 1L; // Версия класса для сериализации
 	
@@ -15,7 +17,7 @@ public class Client implements Serializable {
     public Client(String name, String identityNumber, String driversLicenseNumber,
                   String creditCardNumber, String email, String phone) {
         this.id = getClass().getSimpleName().charAt(0)
-				+ "-" + "0".repeat(nullsNumber(idCounter)) 
+//				+ "-" + "0".repeat(nullsNumber(idCounter)) 
 				+ ID_COUNTER++;
         this.name = name;
         this.identityNumber = identityNumber;
@@ -25,7 +27,7 @@ public class Client implements Serializable {
         this.phone = phone;
     }
     
-    // Геттеры и сеттеры
+    // getters and setters
     public int getId() { 
     	return id; 
     	}
@@ -86,6 +88,7 @@ public class Client implements Serializable {
         } else {
             return 0;
         }
+    }
     
     
     @Override
