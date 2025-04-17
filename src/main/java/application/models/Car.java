@@ -10,6 +10,7 @@ public class Car implements Serializable {
     private int year;
     private double dailyPrice;
     private boolean isAvailable;
+    private String image;
     
     public Car(String brand, String model, int year, double dailyPrice) {
         this.id = getClass().getSimpleName().charAt(0)
@@ -20,6 +21,7 @@ public class Car implements Serializable {
         this.year = year;
         this.dailyPrice = dailyPrice;
         this.isAvailable = true; 
+        this.image = image;
     }
     
     // Геттеры и сеттеры
@@ -75,6 +77,14 @@ public class Car implements Serializable {
         this.isAvailable = true;
     }
     
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     private int nullsNumber(int number) {
         if (number < 10) {
             return 2;
@@ -87,7 +97,14 @@ public class Car implements Serializable {
     
     @Override
     public String toString() {
-        return "Car{" + "id=" + id + ", make=" + make + ", model=" + model +
-               ", year=" + year + ", dailyPrice=" + dailyPrice + ", isAvailable=" + isAvailable + "}";
+        return "Car{" + 
+        		"id=" + id + 
+        		", brand=" + brand + 
+        		", model=" + model +
+        		", year=" + year + 
+        		", dailyPrice=" + dailyPrice + 
+        		", isAvailable=" + isAvailable + 
+        		", image='" + image + '\'' +
+        		'}';
     }
 }
