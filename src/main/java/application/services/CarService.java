@@ -43,5 +43,30 @@ public class CarService {
 //            System.err.println("Автомобиль не найден (ID: " + carId + ")");
 //        }
     }
+
+	public List<String> getBrandList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMinPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMaxPrice() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Car> getListCarByMinPrice(double minPrice) {
+		// TODO Auto-generated method stub
+		return null;		
+	}
+
+	public List<Car> getListCarByMaxPrice(double maxPrice) {
+		// TODO Auto-generated method stub
+		return null;	
+	}
 }
 

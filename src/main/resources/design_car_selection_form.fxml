@@ -10,7 +10,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -52,19 +51,19 @@
                   <ChoiceBox fx:id="brand1" prefHeight="26.0" prefWidth="290.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <ChoiceBox fx:id="brand2" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                   <ChoiceBox fx:id="brand3" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <TextArea fx:id="minPrice" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <TextArea fx:id="maxPrice" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                   <Label text="City" GridPane.columnIndex="1" />
                   <Label text="Sale point" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Date from" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Date to" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="dataFromLabel" text="Date from" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="dataToLabel" text="Date to" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="Driving experience (full years)" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <ChoiceBox fx:id="drivingExperience" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <Label text="Car brand" GridPane.columnIndex="3" />
                   <Label text="Car brand 2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <Label text="Car brand 3" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <Label text="Min price" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                  <Label text="Max price" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <Label fx:id="minPriceLabel" text="Cars with price more than" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <Label fx:id="maxPriceLabel" text="Cars with price low than" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <TextField fx:id="minPriceTF" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="maxPriceTF" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                </children>
             </GridPane>
          </content>

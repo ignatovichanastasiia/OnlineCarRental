@@ -1,11 +1,9 @@
 package application.services;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidRentalDatesException;
-import application.models.Car;
 import application.models.Client;
 
 public class ValidationService {
@@ -24,26 +22,27 @@ public class ValidationService {
         }
     }
 
-    public static void validateRentalDates(Date startDate, Date endDate) throws InvalidRentalDatesException {
+    //TODO
+    public static void validateRentalDates(LocalDate localDateFrom, LocalDate localDateTo) throws InvalidRentalDatesException {
         // Проверяем, что даты не null и дата начала раньше даты окончания
-        if (startDate == null || endDate == null) {
+        if (localDateFrom == null || localDateTo == null) {
             throw new InvalidRentalDatesException("Даты аренды не могут быть null.");
         }
-        if (!startDate.before(endDate)) {
+        if (localDateTo.isBefore(localDateFrom)) {
             throw new InvalidRentalDatesException("Дата начала аренды должна быть раньше даты окончания.");
         }
         // Дополнительно можно проверить, чтобы даты не были в прошлом
-        if (startDate.before(new Date())) {
+        if (localDateFrom.isBefore(LocalDate.now())) {
             throw new InvalidRentalDatesException("Дата начала аренды не может быть в прошлом.");
         }
     }
 
-    public static void validateCarAvailability(Car car) throws CarUnavailableException {
-        if (car == null) {
-            throw new CarUnavailableException("Автомобиль не найден.");
-        }
-        if (!car.isAvailable()) {
-            throw new CarUnavailableException("Автомобиль недоступен для аренды.");
-        }
-    }
+//    public static void validateCarAvailability(Car car) throws CarUnavailableException {
+//        if (car == null) {
+//            throw new CarUnavailableException("Автомобиль не найден.");
+//        }
+//        if (!car.isAvailable()) {
+//            throw new CarUnavailableException("Автомобиль недоступен для аренды.");
+//        }
+//    }
 }

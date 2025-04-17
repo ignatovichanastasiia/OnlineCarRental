@@ -25,6 +25,7 @@ public class CarSelectionForm {
 
 		} catch (IOException e) {
 			System.out.println("Problem with window \"Car selection form\": " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }
