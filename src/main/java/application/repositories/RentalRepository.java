@@ -46,7 +46,8 @@ public class RentalRepository implements Serializable {
 	 */
 	public Rental getRentalById(int id) {
 		for (Rental rental : rentalList) {
-			if (rental.getId() == id) {
+//			if (rental.getId() == id) 
+			{
 				return rental;
 			}
 		}
@@ -73,7 +74,7 @@ public class RentalRepository implements Serializable {
 	 * @param id the unique identifier of the Rental to be deleted.
 	 */
 	public void deleteRental(int id) {
-		rentalList.removeIf(rental -> rental.getId() == id);
+//		rentalList.removeIf(rental -> rental.getId() == id);
 	}
 
 	/**

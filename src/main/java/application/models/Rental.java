@@ -162,23 +162,17 @@ public class Rental implements Serializable {
     public void setShop(String shop) {
         this.shop = shop;
     }
-    
+
     /**
      * Returns a string representation of the Rental instance,
      * including its unique ID, client name, car details, and rental period.
      *
      * @return a String summarizing the rental details.
      */
-    @Override
-    public String toString() {
-        return "Rental{" +
-               "id='" + id + '\'' +
-               ", client=" + (client != null ? client.getName() : "null") +
-               ", car=" + (car != null ? car.getMake() + " " + car.getModel() : "null") +
-               ", rentalStartDate=" + rentalStartDate +
-               ", rentalEndDate=" + rentalEndDate +
-               ", pickUpLocation='" + pickUpLocation + '\'' +
-               ", shop='" + shop + '\'' +
-               '}';
-    }
+	@Override
+	public String toString() {
+		return "Rental [id=" + id + ", client=" + client + ", car=" + car + ", rentalStartDate=" + rentalStartDate
+				+ ", rentalEndDate=" + rentalEndDate + ", pickUpLocation=" + pickUpLocation + ", shop=" + shop + "]";
+	}
+    
 }

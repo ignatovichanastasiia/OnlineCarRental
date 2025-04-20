@@ -43,7 +43,7 @@ public class AppContext {
 			this.clientRepository = new ClientRepository(connection);
 			this.rentalRepository = new RentalRepository(connection);
 			this.shopRepository = new ShopRepository(connection);
-			
+			this.cardRepository = new CardRepository();
 
 			// services
 			this.carService = new CarService(carRepository);
@@ -51,6 +51,7 @@ public class AppContext {
 			this.rentalService = new RentalService(rentalRepository,carRepository);
 			this.shopService = new ShopService(shopRepository);
 			this.validationService = new ValidationService();
+			this.cardService = new CardService();
 			
 		} catch (SQLException e) {
 			throw new RuntimeException("Error init AppContext", e);

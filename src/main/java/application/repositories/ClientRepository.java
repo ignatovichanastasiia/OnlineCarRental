@@ -47,7 +47,7 @@ public class ClientRepository implements Serializable {
 	 */
 	public Client getClientById(int id) {
 		for (Client client : clientList) {
-			if (client.getId() == id)
+//			if (client.getId() == id)
 				return client;
 		}
 		return null;

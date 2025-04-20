@@ -53,7 +53,7 @@ public class EnterAuthFormController {
 		String login = loginField.getText();
 		String password = passwordField.getText();
 		if(login.isBlank()||password.isBlank()) {
-			
+			//берем с полей нового юзера
 		}
 		
 	}
