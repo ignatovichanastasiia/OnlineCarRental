@@ -29,6 +29,11 @@ public class CarSelectionFormController implements Initializable {
 	private CarService carService;
 	private ShopService shopService;
 
+	public CarSelectionFormController(CarService carService, ShopService shopService) {
+		this.carService = carService;
+		this.shopService = shopService;
+	}
+
 	// Lists for Items
 	private List<Car> researchedCarsByfirstBrand = new ArrayList<Car>();;
 	private List<Car> researchedCarsBysecondBrand = new ArrayList<Car>();;

@@ -9,6 +9,10 @@ import application.repositories.ShopRepository;
 public class ShopService {
 	private ShopRepository shopRepository;
 
+	public ShopService(ShopRepository shopRepository) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<String> getAllShopsCitiesList() {
 		return shopRepository.getShops().stream().map(Shop::getCity).collect(Collectors.toList());
 	}
