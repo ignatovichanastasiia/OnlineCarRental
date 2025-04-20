@@ -29,3 +29,4 @@ public class CarSelectionForm {
 		}
 	}
 }
+//ИНИТ С ПЕРЕМЕННЫМИ!!!

@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import application.models.Car;
 import application.services.CarService;
+import application.services.RentalService;
 import application.services.ShopService;
 import application.services.ValidationService;
 import javafx.collections.FXCollections;
@@ -28,10 +29,12 @@ public class CarSelectionFormController implements Initializable {
 	// Service classes
 	private CarService carService;
 	private ShopService shopService;
+	private RentalService rentalService;
 
-	public CarSelectionFormController(CarService carService, ShopService shopService) {
+	public CarSelectionFormController(CarService carService, ShopService shopService, RentalService rentalService) {
 		this.carService = carService;
 		this.shopService = shopService;
+		this.rentalService = rentalService;
 	}
 
 	// Lists for Items
@@ -43,7 +46,7 @@ public class CarSelectionFormController implements Initializable {
 	private List<String> citiesList = shopService.getAllShopsCitiesList();
 	private List<String> pointsAll = shopService.getAllShopsNames();
 	private List<String> cityPoints;
-	private List<String> brands = carService.getBrandList();
+	private List<String> brands = new ArrayList(carService.getCarBrands());
 
 	// service object
 	private String brand;
@@ -132,25 +135,23 @@ public class CarSelectionFormController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// prepare cities CBox
-		cities = new ChoiceBox<String>();
+
 		ObservableList<String> citiesItems = FXCollections.observableArrayList(citiesList);
 		cities.setItems(citiesItems);
 		cities.setOnAction(this::getCitiesChoice);
 		// prepare points CBox
-		points = new ChoiceBox<String>();
+
 		ObservableList<String> pointsItems = FXCollections.observableArrayList(pointsAll);
 		points.setItems(pointsItems);
 		points.setOnAction(this::getPointsChoice);
 		// prepare drivingExperience (drivingYears) CBox
-		drivingExperience = new ChoiceBox<>();
+
 		ObservableList<String> driveYears = FXCollections
 				.observableArrayList(Arrays.asList("more than 2 years", "more than 3 years"));
 		drivingExperience.setItems(driveYears);
 		drivingExperience.setOnAction(this::getDrivingYearsChoice);
 		// prepare brands CBox
-		brand1 = new ChoiceBox<String>();
-		brand2 = new ChoiceBox<String>();
-		brand3 = new ChoiceBox<String>();
+
 		List<String> brands1 = brands;
 		brands1.addFirst("All brands");
 		List<String> brands2 = brands;
@@ -163,7 +164,7 @@ public class CarSelectionFormController implements Initializable {
 		brand3.setItems(brandLastItems);
 		minPrice.setPromptText("Min price is " + carService.getMinPrice());
 		maxPrice.setPromptText("Max price is " + carService.getMaxPrice());
-		carsList = new ListView<>();
+
 		carsList.setItems(FXCollections.observableArrayList(allCars));
 	}
 
@@ -263,9 +264,9 @@ public class CarSelectionFormController implements Initializable {
 		String value = minPrice.getText();
 		try {
 			double minPrice = Double.valueOf(value);
-			List listCarByMinPrice = carService.getListCarByMinPrice(minPrice);
-			allResearchedCarsByBrands.retainAll(listCarByMinPrice);
-			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
+//TODO			List listCarByMinPrice = carService.getListCarByMinPrice(minPrice);
+//			allResearchedCarsByBrands.retainAll(listCarByMinPrice);
+//			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 			
 		} catch (Exception e) {
 			String er = "Wrong price";
@@ -278,9 +279,9 @@ public class CarSelectionFormController implements Initializable {
 		String value = maxPrice.getText();
 		try {
 			double maxPrice = Double.valueOf(value);
-			List listCarByMaxPrice = carService.getListCarByMaxPrice(maxPrice);
-			allResearchedCarsByBrands.retainAll(listCarByMaxPrice);
-			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
+//TODO		List listCarByMaxPrice = carService.getListCarByMaxPrice(maxPrice);//
+//			allResearchedCarsByBrands.retainAll(listCarByMaxPrice);
+//			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 		} catch (Exception e) {
 			String er = "Wrong price";
 			System.out.println(er);

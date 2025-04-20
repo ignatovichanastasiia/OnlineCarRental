@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import application.controllers.AppContext;
 import application.controllers.CarSelectionFormController;
+import application.controllers.EnterAuthFormController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ public class EnterAuthForm {
 		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_enter_auth_form.fxml"));
 		    loader.setControllerFactory(param -> {
 		        if (param == CarSelectionFormController.class) {
-		            return new CarSelectionFormController(context.getCarService());
+		            return new EnterAuthFormController(context.getCarService(),context.getClientService(),context.getRentalService());
 		        }
 		        try {
 		            return param.getDeclaredConstructor().newInstance();
