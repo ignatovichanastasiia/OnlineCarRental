@@ -6,6 +6,9 @@ import application.services.CarService;
 import application.services.ClientService;
 import application.services.RentalService;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 public class EnterAuthFormController {
 	private CarService carService;
@@ -13,7 +16,7 @@ public class EnterAuthFormController {
 	private RentalService rentalService;
 	
 	@FXML
-	Lable leftEnterLabel;
+	Label leftEnterLabel;
 	
 	@FXML
 	TextField loginField;
@@ -47,7 +50,11 @@ public class EnterAuthFormController {
 	}
 	
 	public void takeEnterForm(ActionEvent e){
-		
+		String login = loginField.getText();
+		String password = passwordField.getText();
+		if(login.isBlank()||password.isBlank()) {
+			
+		}
 		
 	}
 

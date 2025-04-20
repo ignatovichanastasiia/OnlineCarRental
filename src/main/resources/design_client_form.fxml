@@ -56,7 +56,7 @@
                      </children>
                   </AnchorPane>
                   <Label layoutX="294.0" layoutY="191.0" prefHeight="18.0" prefWidth="13.0" text="+" />
-                  <Button fx:id="addCard" layoutX="248.0" layoutY="44.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="310.0" text="Add card" />
+                  <Button fx:id="addCard" layoutX="248.0" layoutY="44.0" mnemonicParsing="false" onAction="#addCard" prefHeight="24.0" prefWidth="310.0" text="Add card" />
                </children>
             </AnchorPane>
         </content>

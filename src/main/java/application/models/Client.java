@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
-//    MY CH
+//    CH
     private static int counter = 1;
     private String id;
     private String name;

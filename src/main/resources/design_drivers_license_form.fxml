@@ -41,7 +41,7 @@
             <DatePicker fx:id="issueDate" prefHeight="26.0" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
             <Label text="Expiration Date" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label text="Date of Birth" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="License Categories" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="llicenseCheckLabel" text="License Categories" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="mainDriverLabel" prefHeight="26.0" prefWidth="241.0" text="Main driver" GridPane.columnIndex="1" />
             <Label text="Israeli ID number (ת.ז.)" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="licenseNumber" prefHeight="26.0" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
