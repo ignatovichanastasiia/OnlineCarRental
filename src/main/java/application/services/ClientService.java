@@ -88,4 +88,6 @@ public class ClientService {
         clientRepository.deleteClient(clientId);
         System.out.println("Client deleted (ID: " + clientId + ")");
     }
+
 }
+

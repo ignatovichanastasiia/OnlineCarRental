@@ -10,7 +10,9 @@ import java.io.Serializable;
  */
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
+
 //    CH
+
     private static int counter = 1;
     private String id;
     private String name;
@@ -24,12 +26,14 @@ public class Client implements Serializable {
      * Constructs a new Client with the specified details.
      *
      * @param name                 the full name of the client
+
      * @param email                the client's email address
      * @param phone                the client's phone number
      */
     
     //MY CH
     public Client(String name, String email, String phone) {
+
         String className = getClass().getSimpleName();
         String prefix = className.length() >= 2 ? className.substring(0, 2) : className;
         this.id = String.format("%s-%03d", prefix, counter++);

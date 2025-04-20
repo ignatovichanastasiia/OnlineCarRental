@@ -1,4 +1,3 @@
-
 package application.exceptions;
 
 /**
@@ -40,4 +39,6 @@ public class InvalidClientDataException extends Exception {
     public InvalidClientDataException(Throwable cause) {
         super(cause);
     }
+
 }
+
