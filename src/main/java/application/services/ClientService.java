@@ -1,8 +1,9 @@
+
 package application.services;
 
 import application.exceptions.InvalidClientDataException;
-import models.Client;
-import repositories.ClientRepository;
+import application.models.Client;
+import application.repositories.ClientRepository;
 
 /**
  * The ClientService class provides business operations for managing Client objects.
@@ -87,4 +88,6 @@ public class ClientService {
         clientRepository.deleteClient(clientId);
         System.out.println("Client deleted (ID: " + clientId + ")");
     }
+
 }
+

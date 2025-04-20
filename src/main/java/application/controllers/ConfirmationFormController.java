@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 
-public class GUIController implements Initializable {
+public class ConfirmationFormController implements Initializable {
 
     @FXML private Accordion accordion;
     @FXML private TitledPane carsPane;

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -9,13 +10,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
+
+<?import javafx.scene.control.TextField?>
+
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<Accordion fx:id="accordion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.GUIController">
+
+<?import javafx.scene.text.Font?>
+
+<Accordion fx:id="accordion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.CarSelectionFormController">
+
   <panes>
     <TitledPane animated="false" text="filters">
          <content>
@@ -41,26 +48,28 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <DatePicker prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <DatePicker prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="290.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                  <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+
+                  <DatePicker fx:id="dateFrom" prefHeight="26.0" prefWidth="230.0" promptText="Enter the rental start date." GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ChoiceBox fx:id="cities" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="points" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="dateTo" prefHeight="26.0" prefWidth="230.0" promptText="Enter the rental end date." GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <ChoiceBox fx:id="brand1" prefHeight="26.0" prefWidth="290.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="brand2" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <ChoiceBox fx:id="brand3" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <Label text="City" GridPane.columnIndex="1" />
                   <Label text="Sale point" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Date from" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Date to" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="dataFromLabel" text="Date from" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="dataToLabel" text="Date to" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="Driving experience (full years)" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <ChoiceBox fx:id="drivingExperience" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <Label text="Car brand" GridPane.columnIndex="3" />
                   <Label text="Car brand 2" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                   <Label text="Car brand 3" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <Label text="Min price" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                  <Label text="Max price" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <Label fx:id="minPriceLabel" text="Cars with price more than" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                  <Label fx:id="maxPriceLabel" text="Cars with price low than" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <TextField fx:id="minPriceTF" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="maxPriceTF" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+
                </children>
             </GridPane>
          </content>
@@ -73,7 +82,9 @@
                     <content>
                       <AnchorPane minHeight="-Infinity" minWidth="-Infinity">
                            <children>
-                              <ListView fx:id="list_view" accessibleText="List view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="566.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+                              <ListView fx:id="carsList" accessibleText="List view" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="566.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />
                                  </cursor>
@@ -91,7 +102,9 @@
 			                    <children>
                   <ButtonBar layoutX="28.0" layoutY="385.0" prefHeight="46.0" prefWidth="571.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="10.0">
                     <buttons>
-                      <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="540.0" text="Сomplete" />
+
+                      <Button fx:id="complete" mnemonicParsing="false" prefHeight="33.0" prefWidth="540.0" text="Сomplete" />
+
                     </buttons>
                   </ButtonBar>
                   <GridPane layoutY="17.0" prefHeight="322.0" prefWidth="594.0">
@@ -111,14 +124,22 @@
                     </rowConstraints>
                      <children>
                               <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Additional Services:" GridPane.columnIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Wi-Fi Router in the Car" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Snow Chains" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                        <CheckBox mnemonicParsing="false" text="Additional Driver" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <CheckBox mnemonicParsing="false" text="Full Tank Option" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <CheckBox mnemonicParsing="false" text="Cross-Border Travel Permission" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <CheckBox mnemonicParsing="false" text="Child Seat" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <CheckBox mnemonicParsing="false" text="GPS Navigator" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <CheckBox mnemonicParsing="false" text="Full Insurance" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <CheckBox fx:id="wifi" mnemonicParsing="false" text="Wi-Fi Router in the Car*" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="moreDriver" mnemonicParsing="false" text="Additional Driver*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="tank" mnemonicParsing="false" text="Full Tank Option" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="crossborder" mnemonicParsing="false" text="Cross-Border Travel Permission*" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="child" mnemonicParsing="false" text="Child Seat*" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="GPS" mnemonicParsing="false" text="GPS Navigator*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="insurance" mnemonicParsing="false" text="Full Insurance" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="pickUpAddress" promptText="Pick-up address" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Label text="*" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Label text="*Services with an asterisk are provided only after agreement with the manager" wrapText="true" GridPane.columnIndex="3">
+                           <font>
+                              <Font name="System Italic" size="11.0" />
+                           </font>
+                        </Label>
+
                      </children>
                   </GridPane>
                     </children>

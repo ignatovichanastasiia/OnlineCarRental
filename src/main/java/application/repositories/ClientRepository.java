@@ -1,9 +1,15 @@
 package application.repositories;
 
-import models.Client;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.*;
+
 
 /**
  * The ClientRepository class provides CRUD operations for managing Client objects.
@@ -100,3 +106,4 @@ public class ClientRepository implements Serializable {
         return clientList;
     }
 }
+

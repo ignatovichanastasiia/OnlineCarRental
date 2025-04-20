@@ -1,14 +1,15 @@
+
 package application.services;
 
-import application.exceptions.InvalidRentalDatesException;
-import application.exceptions.CarUnavailableException;
-import models.Client;
-import models.Car;
-import models.Rental;
-import repositories.RentalRepository;
-import repositories.CarRepository;
-
 import java.util.Date;
+
+import application.exceptions.CarUnavailableException;
+import application.exceptions.InvalidRentalDatesException;
+import application.models.Car;
+import application.models.Client;
+import application.models.Rental;
+import application.repositories.CarRepository;
+import application.repositories.RentalRepository;
 
 /**
  * The RentalService class provides business logic for managing Rental records.

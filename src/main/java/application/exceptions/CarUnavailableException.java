@@ -1,9 +1,12 @@
+
+
 package application.exceptions;
 
 /**
  * Thrown when a car is not available for rental.
  */
 public class CarUnavailableException extends Exception {
+
 
     /**
      * Constructs a new CarUnavailableException with {@code null} as its detail message.
@@ -39,4 +42,6 @@ public class CarUnavailableException extends Exception {
     public CarUnavailableException(Throwable cause) {
         super(cause);
     }
+
 }
+

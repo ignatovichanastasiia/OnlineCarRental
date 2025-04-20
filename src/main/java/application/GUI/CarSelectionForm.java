@@ -13,18 +13,20 @@ public class CarSelectionForm {
 
 	public void startCarSelectionForm(Stage primaryStage) {
 		try {
-			URL fxmlUrl = getClass().getResource("design_car_selection_form.fxml");
+			URL fxmlUrl = getClass().getResource("/design_car_selection_form.fxml");
 			System.out.println("FXML URL: " + fxmlUrl);
 			Parent root = FXMLLoader.load(fxmlUrl);
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Car rent app");
-			Image icon = new Image(getClass().getResourceAsStream("icon.png"));
+			Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
 			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
 		} catch (IOException e) {
 			System.out.println("Problem with window \"Car selection form\": " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }
+//ИНИТ С ПЕРЕМЕННЫМИ!!!

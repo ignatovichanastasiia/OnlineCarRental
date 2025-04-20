@@ -1,12 +1,13 @@
 package application.services;
 
-import application.exceptions.CarUnavailableException;
-import models.Car;
-import repositories.CarRepository;
-
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+
+import application.exceptions.CarUnavailableException;
+import application.models.Car;
+import application.repositories.CarRepository;
 
 /**
  * The CarService class provides business operations related to Car objects.

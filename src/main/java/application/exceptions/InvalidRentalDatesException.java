@@ -1,3 +1,4 @@
+
 package application.exceptions;
 
 /**
@@ -39,4 +40,6 @@ public class InvalidRentalDatesException extends Exception {
     public InvalidRentalDatesException(Throwable cause) {
         super(cause);
     }
+
 }
+

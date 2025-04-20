@@ -1,12 +1,14 @@
 package application.services;
 
+import java.time.LocalDate;
+
+import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidRentalDatesException;
-import application.exceptions.CarUnavailableException;
-import models.Client;
-import models.Car;
 
-import java.time.LocalDate;
+import application.models.Car;
+import application.models.Client;
+
 
 /**
  * The ValidationService class provides static methods for validating various inputs in the application.
