@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidRentalDatesException;
+
 import application.models.Car;
 import application.models.Client;
+
 
 /**
  * The ValidationService class provides static methods for validating various inputs in the application.

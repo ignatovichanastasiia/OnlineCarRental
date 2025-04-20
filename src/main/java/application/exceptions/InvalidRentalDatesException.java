@@ -35,6 +35,7 @@ public class InvalidRentalDatesException extends Exception {
 		super(message, cause);
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Constructs a new InvalidRentalDatesException with the specified cause.
 	 *
@@ -43,4 +44,16 @@ public class InvalidRentalDatesException extends Exception {
 	public InvalidRentalDatesException(Throwable cause) {
 		super(cause);
 	}
+=======
+    /**
+     * Constructs a new InvalidRentalDatesException with the specified cause.
+     *
+     * @param cause the cause of the exception.
+     */
+    public InvalidRentalDatesException(Throwable cause) {
+        super(cause);
+    }
+
+>>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
 }
+

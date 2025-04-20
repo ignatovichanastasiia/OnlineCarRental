@@ -169,6 +169,7 @@ public class Rental implements Serializable {
      *
      * @return a String summarizing the rental details.
      */
+<<<<<<< HEAD
 	@Override
 	public String toString() {
 		return "Rental [id=" + id + ", client=" + client + ", car=" + car + ", rentalStartDate=" + rentalStartDate
@@ -176,3 +177,18 @@ public class Rental implements Serializable {
 	}
     
 }
+=======
+    @Override
+    public String toString() {
+        return "Rental{" +
+               "id='" + id + '\'' +
+               ", client=" + (client != null ? client.getName() : "null") +
+               ", car=" + (car != null ? car.getMake() + " " + car.getModel() : "null") +
+               ", rentalStartDate=" + rentalStartDate +
+               ", rentalEndDate=" + rentalEndDate +
+               ", pickUpLocation='" + pickUpLocation + '\'' +
+               ", shop='" + shop + '\'' +
+               '}';
+    }
+}
+>>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
