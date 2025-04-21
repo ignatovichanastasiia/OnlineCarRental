@@ -9,6 +9,7 @@ import application.repositories.ShopRepository;
 public class ShopService {
 	private ShopRepository shopRepository;
 
+	//TODO NOW!
 	public ShopService(ShopRepository shopRepository) {
 		// TODO Auto-generated constructor stub
 	}

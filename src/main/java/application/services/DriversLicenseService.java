@@ -22,6 +22,6 @@ public class DriversLicenseService {
 	public void addDriversLicense(String taudatZehudNumber, String strLicenseNumber, LocalDate clientBirth,
 			LocalDate dateIssue, LocalDate dateExpir) {
 		DriversLicense drLicense = new DriversLicense(taudatZehudNumber, strLicenseNumber, clientBirth, dateIssue, dateExpir);
-//!!TODO		ClientService.getClient.setLicense(drLicense);
+//!!TODO NOW - не правильный метод! ПРодумать путь!		ClientService.getClient.setLicense(drLicense);
 	}
 }

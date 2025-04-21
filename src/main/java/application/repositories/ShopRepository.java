@@ -8,7 +8,7 @@ import application.models.Shop;
 
 //ЗАГЛУШКА!! 
 
-//TODO
+//TODO NOW!
 
 public class ShopRepository {
 	private List<Shop> shops;
