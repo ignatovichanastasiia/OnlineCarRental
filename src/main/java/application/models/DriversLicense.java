@@ -70,7 +70,7 @@ public class DriversLicense {
 
 	@Override
 	public String toString() {
-		return "DriverLicens [number=" + taudatZehut + ", id=" + id + ", dateBirth=" + dateBirth + ", ctegory=" + ctegory
+		return "DriverLicens [number=" + taudatZehut + ", id=" + id + ", dateBirth=" + dateBirth + ", category=" + category
 				+ ", issue=" + issue + ", expiration=" + expiration + "]";
 	}
 

@@ -27,11 +27,13 @@ import javafx.scene.control.TextField;
 
 public class CarSelectionFormController implements Initializable {
 	// Service classes
+	private AppContext context;
 	private CarService carService;
 	private ShopService shopService;
 	private RentalService rentalService;
 
-	public CarSelectionFormController(CarService carService, ShopService shopService, RentalService rentalService) {
+	public CarSelectionFormController(AppContext context, CarService carService, ShopService shopService, RentalService rentalService) {
+		this.context = context;
 		this.carService = carService;
 		this.shopService = shopService;
 		this.rentalService = rentalService;
@@ -241,17 +243,17 @@ public class CarSelectionFormController implements Initializable {
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
 
-	public void getDateStartRental() {
+	public void getDateStartRental(ActionEvent e) {
 		localDateFrom = dateFrom.getValue();
 	}
 
-	public void getDateEndRental() {
+	public void getDateEndRental(ActionEvent e) {
 		// TODO
 		System.out.println("Here we need logic with prof dates");
 		localDateTo = dateTo.getValue();
 		try {
 			ValidationService.validateRentalDates(localDateFrom, localDateTo);
-		} catch (Exception e) {
+		} catch (Exception exep) {
 			String error = "Dates are not valid";
 			System.out.println(error);
 			dateFromLabel.setText(error);
@@ -259,6 +261,15 @@ public class CarSelectionFormController implements Initializable {
 			return;
 		}
 	}
+	
+	public void clickComplete(ActionEvent e) {
+		//TODO
+		//Сгребла все данные, расшвыряла сеттерами, открыла договор, вместо открыла права,
+		// вместо прав карту, заменила все на инфу! Оставила логин и пароль для клиента. 
+		//По логину открываем инфу, если новая рентал, то окно выбора 
+	}
+	
+	
 
 	public void getMinPrice() {
 		String value = minPrice.getText();
@@ -289,3 +300,44 @@ public class CarSelectionFormController implements Initializable {
 		}
 	}
 }
+
+
+/*TODO
+ * 
+ * Надо собрать акшон с аккордиона. Назвать в скин билдере все пэйны и аккордион. А далее:
+ * @FXML
+private Accordion accordion;
+
+@FXML
+private TitledPane pane1;
+
+@FXML
+private TitledPane pane2;
+
+@FXML
+private TitledPane pane3;
+
+@FXML
+public void initialize() {
+    accordion.expandedPaneProperty().addListener((obs, oldPane, newPane) -> {
+        if (newPane != null) {
+            System.out.println("Теперь открыта панель: " + newPane.getText());
+
+            // Пример логики
+            if (newPane == pane1) {
+                System.out.println("Панель 1 выбрана");
+            } else if (newPane == pane2) {
+                System.out.println("Панель 2 выбрана");
+            } else if (newPane == pane3) {
+                System.out.println("Панель 3 выбрана");
+            }
+        } else {
+            System.out.println("Ничего не выбрано (все свернуты)");
+        }
+    });
+}
+ *когда открыли КАРСЫ - надо запустить лист 
+ *выделить машину, сохранить ее, как КАР
+ *дождаться данных с кнопки комплитед
+ *
+*/

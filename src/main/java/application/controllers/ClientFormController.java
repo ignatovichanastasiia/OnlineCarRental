@@ -120,11 +120,12 @@ public class ClientFormController implements Initializable {
 		}
 		String cardCvv = cvv.getText();
 		String cardHolder = cardholder.getText();
-		//Card(String number, String firstName, String lastName, String email, String phone,
-		//String cvv, int month, int year, String cardholder)
+		
 		cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder);
 		//закрыть окно 
 			
 	}
 	
 }
+//Card(String number, String firstName, String lastName, String email, String phone,
+//String cvv, int month, int year, String cardholder, String clientAppID) {

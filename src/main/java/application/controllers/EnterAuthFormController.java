@@ -1,19 +1,24 @@
 package application.controllers;
 
-import java.awt.event.ActionEvent;
-
+import application.GUI.CarSelectionForm;
+import application.models.Client;
+import application.models.Rental;
 import application.services.CarService;
 import application.services.ClientService;
 import application.services.RentalService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class EnterAuthFormController {
 	private CarService carService;
 	private ClientService clientService;
 	private RentalService rentalService;
+	private AppContext context;
 	
 	@FXML
 	Label leftEnterLabel;
@@ -43,16 +48,30 @@ public class EnterAuthFormController {
 	Button enterButton;
 	
 	
-	public EnterAuthFormController(CarService carService, ClientService clientService, RentalService rentalService) {
+	public EnterAuthFormController(AppContext context, CarService carService, ClientService clientService, RentalService rentalService) {
+		this.context = context;
 		this.carService = carService;
 		this.clientService = clientService;
 		this.rentalService = rentalService;
 	}
 	
 	public void takeEnterForm(ActionEvent e){
-		String login = loginField.getText();
-		String password = passwordField.getText();
-		if(login.isBlank()||password.isBlank()) {
+		String clientLogin = loginField.getText();
+		String clientPassword = passwordField.getText();
+		if(clientLogin.isBlank()||clientPassword.isBlank()) {
+			String clientFirstName = firstNameField.getText();
+			String clientFamilyName = familyNameField.getText();
+			String clientPhone = phoneNumberField.getText();
+			String clientEmail = emailField.getText();
+			//String name, String email, String phone
+			String clientName = clientFirstName+" "+clientFamilyName;
+			Client client = new Client(clientName,clientEmail,clientPhone); //TODO ПРОВЕРИТЬ КЛИЕНТА С КОНСТРУКТОРОМ
+			Rental rental = new Rental(client); //TODO РЕНТАЛ С КОНСТРУКТОРОМ КЛИЕНТ
+			rentalService.setRental(rental); //TODO do this setter
+			
+	        Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+	        new CarSelectionForm().startCarSelectionForm(currentStage, context);
+			
 			
 		}
 		

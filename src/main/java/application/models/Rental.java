@@ -30,8 +30,7 @@ public class Rental implements Serializable {
      * @param pickUpLocation   the location where the car is picked up
      * @param shop		       the location where the car is delivered
      */
-    public Rental(Client client, Car car, Date rentalStartDate, Date rentalEndDate,
-                  String pickUpLocation, String shop) {
+    public Rental(Client client) {
         // Generate a unique ID using the first two letters of the class name (e.g., "Rental" -> "Re")
         // and a counter formatted as a three-digit number.
         String className = getClass().getSimpleName();
@@ -39,11 +38,11 @@ public class Rental implements Serializable {
         this.id = String.format("%s-%03d", prefix, counter++);
         
         this.client = client;
-        this.car = car;
-        this.rentalStartDate = rentalStartDate;
-        this.rentalEndDate = rentalEndDate;
-        this.pickUpLocation = pickUpLocation;
-        this.shop = shop;
+        this.car = null;
+        this.rentalStartDate = null;
+        this.rentalEndDate = null;
+        this.pickUpLocation = null;
+        this.shop = null;
     }
     
     /**
@@ -162,13 +161,22 @@ public class Rental implements Serializable {
     public void setShop(String shop) {
         this.shop = shop;
     }
-    
+
     /**
      * Returns a string representation of the Rental instance,
      * including its unique ID, client name, car details, and rental period.
      *
      * @return a String summarizing the rental details.
      */
+<<<<<<< HEAD
+	@Override
+	public String toString() {
+		return "Rental [id=" + id + ", client=" + client + ", car=" + car + ", rentalStartDate=" + rentalStartDate
+				+ ", rentalEndDate=" + rentalEndDate + ", pickUpLocation=" + pickUpLocation + ", shop=" + shop + "]";
+	}
+    
+}
+=======
     @Override
     public String toString() {
         return "Rental{" +
@@ -182,3 +190,4 @@ public class Rental implements Serializable {
                '}';
     }
 }
+>>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git

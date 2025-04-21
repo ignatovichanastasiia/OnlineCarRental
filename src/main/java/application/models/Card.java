@@ -13,7 +13,7 @@ public class Card {
 	String clientAppID;
 	
 	public Card(String number, String firstName, String lastName, String email, String phone,
-			String cvv, int month, int year, String cardholder, clientAppID) {
+			String cvv, int month, int year, String cardholder, String clientAppID) {
 		this.number = number;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -81,8 +81,10 @@ public class Card {
 	}
 	@Override
 	public String toString() {
-		return "Card [number=" + number + ", IDNumber=" + IDNumber + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + ", phone=" + phone + ", cvv=" + cvv + ", month=" + month + ", year="
-				+ year + ", cardholder=" + cardholder + "]";
+		return "Card [number=" + number + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", phone=" + phone + ", cvv=" + cvv + ", month=" + month + ", year=" + year + ", cardholder="
+				+ cardholder + ", clientAppID=" + clientAppID + "]";
 	}
+
+	
 }

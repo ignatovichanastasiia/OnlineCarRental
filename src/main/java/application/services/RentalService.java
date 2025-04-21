@@ -18,7 +18,8 @@ import application.repositories.RentalRepository;
  */
 public class RentalService {
     private RentalRepository rentalRepository; 
-    private CarRepository carRepository;       
+    private CarRepository carRepository; 
+    private Rental rental;
 
     /**
      * Constructs a new RentalService with the specified repositories.
