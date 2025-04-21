@@ -31,7 +31,18 @@ public class CarSelectionFormController implements Initializable {
 	private CarService carService;
 	private ShopService shopService;
 	private RentalService rentalService;
-
+	
+	/***
+	 * The main window of the application. Consists of filters, 
+	 * the main sheet for selecting a car and selecting additional services 
+	 * (designed for coordination with the manager). The user first selects additional 
+	 * information, then selects a car, then selects additional services.
+	 * 
+	 * @param context
+	 * @param carService
+	 * @param shopService
+	 * @param rentalService
+	 */
 	public CarSelectionFormController(AppContext context, CarService carService, ShopService shopService, RentalService rentalService) {
 		this.context = context;
 		this.carService = carService;
@@ -137,23 +148,19 @@ public class CarSelectionFormController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// prepare cities CBox
-
 		ObservableList<String> citiesItems = FXCollections.observableArrayList(citiesList);
 		cities.setItems(citiesItems);
 		cities.setOnAction(this::getCitiesChoice);
 		// prepare points CBox
-
 		ObservableList<String> pointsItems = FXCollections.observableArrayList(pointsAll);
 		points.setItems(pointsItems);
 		points.setOnAction(this::getPointsChoice);
 		// prepare drivingExperience (drivingYears) CBox
-
 		ObservableList<String> driveYears = FXCollections
 				.observableArrayList(Arrays.asList("more than 2 years", "more than 3 years"));
 		drivingExperience.setItems(driveYears);
 		drivingExperience.setOnAction(this::getDrivingYearsChoice);
 		// prepare brands CBox
-
 		List<String> brands1 = brands;
 		brands1.addFirst("All brands");
 		List<String> brands2 = brands;
@@ -166,12 +173,13 @@ public class CarSelectionFormController implements Initializable {
 		brand3.setItems(brandLastItems);
 		minPrice.setPromptText("Min price is " + carService.getMinPrice());
 		maxPrice.setPromptText("Max price is " + carService.getMaxPrice());
-
+		//prepare list of cars
 		carsList.setItems(FXCollections.observableArrayList(allCars));
+		// TODO EXTRA NOW!!!
 	}
 
 	public void getCitiesChoice(ActionEvent e) {
-		// TODO
+		// TODO FOR GOOD TIME
 		System.out.println("CITY. There is no software logic here now, but in the future this choice will affect "
 				+ "\nthe list of cars, since each point of sale has its own list of cars "
 				+ "\n(points on diferent cities).");
@@ -182,13 +190,14 @@ public class CarSelectionFormController implements Initializable {
 	}
 
 	public void getPointsChoice(ActionEvent e) {
-		// TODO
+		// TODO FOR GOOD TIME
 		System.out.println("POINT. There is no software logic here now, but in the future this choice will affect "
 				+ "\nthe list of cars, since each point of sale has its own list of cars.");
 		point = points.getValue();
 	}
 
 	public void getDrivingYearsChoice(ActionEvent e) {
+		// TODO FOR GOOD TIME
 		System.out.println(
 				"DRIVE EXSP. There is no software logic behind this at the moment, \nbut in the future this choice may affect the availability of certain classes of cars.");
 
@@ -205,7 +214,7 @@ public class CarSelectionFormController implements Initializable {
 			allResearchedCarsByBrands = allCars;
 			researchedCarsByfirstBrand = new ArrayList<Car>();
 		}
-//TODO		researchedCarsByfirstBrand = carService.getListCarByBrand(brand);
+//TODO NOW		researchedCarsByfirstBrand = carService.getListCarByBrand(brand); 
 		allResearchedCarsByBrands.addAll(researchedCarsByfirstBrand);
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
@@ -223,7 +232,7 @@ public class CarSelectionFormController implements Initializable {
 		if (brand.equalsIgnoreCase("none")) {
 
 		}
-//TODO		researchedCarsBysecondBrand = carService.getListCarByBrand(brand);
+//TODO NOW		researchedCarsBysecondBrand = carService.getListCarByBrand(brand);
 		allResearchedCarsByBrands.addAll(researchedCarsBysecondBrand);
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
@@ -238,7 +247,7 @@ public class CarSelectionFormController implements Initializable {
 			}
 		}
 		brand = brand3.getValue();
-//TODO		researchedCarsBythirdBrand = carService.getListCarByBrand(brand);
+//TODO	NOW!	researchedCarsBythirdBrand = carService.getListCarByBrand(brand);
 		allResearchedCarsByBrands.addAll(researchedCarsBythirdBrand);
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
@@ -248,7 +257,7 @@ public class CarSelectionFormController implements Initializable {
 	}
 
 	public void getDateEndRental(ActionEvent e) {
-		// TODO
+		// TODO NOW!!!
 		System.out.println("Here we need logic with prof dates");
 		localDateTo = dateTo.getValue();
 		try {
@@ -263,10 +272,10 @@ public class CarSelectionFormController implements Initializable {
 	}
 	
 	public void clickComplete(ActionEvent e) {
-		//TODO
-		//Сгребла все данные, расшвыряла сеттерами, открыла договор, вместо открыла права,
-		// вместо прав карту, заменила все на инфу! Оставила логин и пароль для клиента. 
-		//По логину открываем инфу, если новая рентал, то окно выбора 
+		//TODO NOW!!! 
+		//Сгребла все данные, расшвыряла сеттерами, вместо открыла права,
+		// вместо прав карту, открыла договор, заменила все на инфу! Оставила логин и пароль для клиента. 
+		//По логину открываем инфу - ok -  энтер страница или новая рентал -  то окно выбора 
 	}
 	
 	
@@ -275,7 +284,7 @@ public class CarSelectionFormController implements Initializable {
 		String value = minPrice.getText();
 		try {
 			double minPrice = Double.valueOf(value);
-//TODO			List listCarByMinPrice = carService.getListCarByMinPrice(minPrice);
+//TODO	NOW!		List listCarByMinPrice = carService.getListCarByMinPrice(minPrice);
 //			allResearchedCarsByBrands.retainAll(listCarByMinPrice);
 //			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 			
@@ -290,7 +299,7 @@ public class CarSelectionFormController implements Initializable {
 		String value = maxPrice.getText();
 		try {
 			double maxPrice = Double.valueOf(value);
-//TODO		List listCarByMaxPrice = carService.getListCarByMaxPrice(maxPrice);//
+//TODO	NOW!!	List listCarByMaxPrice = carService.getListCarByMaxPrice(maxPrice);//
 //			allResearchedCarsByBrands.retainAll(listCarByMaxPrice);
 //			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 		} catch (Exception e) {
@@ -339,5 +348,7 @@ public void initialize() {
  *когда открыли КАРСЫ - надо запустить лист 
  *выделить машину, сохранить ее, как КАР
  *дождаться данных с кнопки комплитед
+ *
+ *СДЕЛАТЬ ДОП РЕСУРСЫ!
  *
 */

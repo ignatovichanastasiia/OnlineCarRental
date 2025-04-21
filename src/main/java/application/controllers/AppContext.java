@@ -35,14 +35,15 @@ public class AppContext {
 
 	public AppContext() {
 		try {
-			// H2
-			this.connection = DriverManager.getConnection("jdbc:h2:~/onlinecarrental", "sa", "");
+			// TODO 
+			H2 FOR GOOD TIME
+//			this.connection = DriverManager.getConnection("jdbc:h2:~/onlinecarrental", "sa", "");
 
 			// repo
-			this.carRepository = new CarRepository(connection);
-			this.clientRepository = new ClientRepository(connection);
-			this.rentalRepository = new RentalRepository(connection);
-			this.shopRepository = new ShopRepository(connection);
+			this.carRepository = new CarRepository();
+			this.clientRepository = new ClientRepository();
+			this.rentalRepository = new RentalRepository();
+			this.shopRepository = new ShopRepository();
 			this.cardRepository = new CardRepository();
 
 			// services
