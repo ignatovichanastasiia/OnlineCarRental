@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,9 +27,9 @@ public class CarRepository implements Serializable {
     
     
 //TODO FOR GOOD TIME  CONSTRUCTOR W Connection
-    public CarRepository(Connection connection) {
+//    public CarRepository(Connection connection) {
 		// TODO Auto-generated constructor stub
-	}
+//	}
 
     /**
      * Saves a new Car object to the repository.
