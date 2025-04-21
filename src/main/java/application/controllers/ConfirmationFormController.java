@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
-
+//ВНИМАНИЕ НЕ ТОТ КОНТРОЛЛЕР
 public class ConfirmationFormController implements Initializable {
 
     @FXML private Accordion accordion;

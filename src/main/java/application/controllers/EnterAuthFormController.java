@@ -65,9 +65,15 @@ public class EnterAuthFormController {
 			String clientEmail = emailField.getText();
 			//String name, String email, String phone
 			String clientName = clientFirstName+" "+clientFamilyName;
+			try {
 			Client client = new Client(clientName,clientEmail,clientPhone); //TODO ПРОВЕРИТЬ КЛИЕНТА С КОНСТРУКТОРОМ
 			Rental rental = new Rental(client); //TODO РЕНТАЛ С КОНСТРУКТОРОМ КЛИЕНТ
 			rentalService.setRental(rental); //TODO do this setter
+			}catch(Exception exep) {
+				System.out.println("The data is not valid: "+exep.getMessage());
+				inputInfoLabel.setText("The data is not valid");
+				return;
+			}
 			
 	        Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 	        new CarSelectionForm().startCarSelectionForm(currentStage, context);

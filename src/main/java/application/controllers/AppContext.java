@@ -1,8 +1,5 @@
 package application.controllers;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import application.repositories.CarRepository;
 import application.repositories.CardRepository;
 import application.repositories.ClientRepository;
@@ -17,7 +14,7 @@ import application.services.ValidationService;
 
 public class AppContext {
 
-	private final Connection connection;
+//	private final Connection connection;
 
 	private final CarRepository carRepository;
 	private final ClientRepository clientRepository;
@@ -33,7 +30,7 @@ public class AppContext {
 	private final CardService cardService;
 
 	public AppContext() {
-		try {
+//TODO FOR GOOD TIME (DB)		try {
 			// TODO 
 //			H2 FOR GOOD TIME
 //			this.connection = DriverManager.getConnection("jdbc:h2:~/onlinecarrental", "sa", "");
@@ -53,14 +50,14 @@ public class AppContext {
 			this.validationService = new ValidationService();
 			this.cardService = new CardService();
 			
-		} catch (SQLException e) {
-			throw new RuntimeException("Error init AppContext", e);
-		}
+//		} catch (Exception e) {
+//			System.out.println("Problem in AppContext: "+e.getMessage());
+//		}
 	}
 
-	public Connection getConnection() {
-		return connection;
-	}
+//	public Connection getConnection() {
+//		return connection;
+//	}
 
 	public CarRepository getCarRepository() {
 		return carRepository;
@@ -107,13 +104,13 @@ public class AppContext {
 	}
 
 
-	public void close() {
-		try {
-			if (connection != null && !connection.isClosed()) {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			System.err.println("Error exiting data base: " + e.getMessage());
-		}
-	}
+//	public void close() {
+//		try {
+//			if (connection != null && !connection.isClosed()) {
+//				connection.close();
+//			}
+//		} catch (SQLException e) {
+//			System.err.println("Error exiting data base: " + e.getMessage());
+//		}
+//	}
 }

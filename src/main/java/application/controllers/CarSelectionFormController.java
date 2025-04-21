@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import application.models.Car;
+import application.repositories.CarRepository;
 import application.services.CarService;
 import application.services.RentalService;
 import application.services.ShopService;
@@ -27,6 +28,7 @@ import javafx.scene.control.TextField;
 
 public class CarSelectionFormController implements Initializable {
 	// Service classes
+	private CarRepository carRepository;
 	private AppContext context;
 	private CarService carService;
 	private ShopService shopService;
@@ -214,7 +216,7 @@ public class CarSelectionFormController implements Initializable {
 			allResearchedCarsByBrands = allCars;
 			researchedCarsByfirstBrand = new ArrayList<Car>();
 		}
-//TODO NOW		researchedCarsByfirstBrand = carService.getListCarByBrand(brand); 
+		researchedCarsByfirstBrand = carRepository.getListCarByBrand(brand); 
 		allResearchedCarsByBrands.addAll(researchedCarsByfirstBrand);
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
@@ -232,7 +234,7 @@ public class CarSelectionFormController implements Initializable {
 		if (brand.equalsIgnoreCase("none")) {
 
 		}
-//TODO NOW		researchedCarsBysecondBrand = carService.getListCarByBrand(brand);
+		researchedCarsBysecondBrand = carRepository.getListCarByBrand(brand);
 		allResearchedCarsByBrands.addAll(researchedCarsBysecondBrand);
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
@@ -247,7 +249,7 @@ public class CarSelectionFormController implements Initializable {
 			}
 		}
 		brand = brand3.getValue();
-//TODO	NOW!	researchedCarsBythirdBrand = carService.getListCarByBrand(brand);
+		researchedCarsBythirdBrand = carRepository.getListCarByBrand(brand);
 		allResearchedCarsByBrands.addAll(researchedCarsBythirdBrand);
 		carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 	}
@@ -257,7 +259,6 @@ public class CarSelectionFormController implements Initializable {
 	}
 
 	public void getDateEndRental(ActionEvent e) {
-		// TODO NOW!!!
 		System.out.println("Here we need logic with prof dates");
 		localDateTo = dateTo.getValue();
 		try {
@@ -284,9 +285,9 @@ public class CarSelectionFormController implements Initializable {
 		String value = minPrice.getText();
 		try {
 			double minPrice = Double.valueOf(value);
-//TODO	NOW!		List listCarByMinPrice = carService.getListCarByMinPrice(minPrice);
-//			allResearchedCarsByBrands.retainAll(listCarByMinPrice);
-//			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
+			List listCarByMinPrice = carRepository.getListCarByMinPrice(minPrice);
+			allResearchedCarsByBrands.retainAll(listCarByMinPrice);
+			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 			
 		} catch (Exception e) {
 			String er = "Wrong price";

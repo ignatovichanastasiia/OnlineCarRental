@@ -193,4 +193,10 @@ public class CarRepository implements Serializable {
     public List<Car> getAllCars() {
         return carList;
     }
+
+    //TODO
+	public List getListCarByMinPrice(double minPrice) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

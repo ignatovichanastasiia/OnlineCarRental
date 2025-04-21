@@ -18,6 +18,7 @@ import application.repositories.RentalRepository;
 public class RentalService {
     private RentalRepository rentalRepository; 
     private CarRepository carRepository; 
+    private Rental currentRental;
 
     /**
      * Constructs a new RentalService with the specified repositories.
@@ -114,4 +115,12 @@ public class RentalService {
             System.err.println("Rental record not found (ID: " + rentalId + ")");
         }
     }
+
+	public Rental getRental() {
+		return currentRental;
+	}
+
+	public void setRental(Rental rental) {
+		this.currentRental = rental;
+	}
 }
