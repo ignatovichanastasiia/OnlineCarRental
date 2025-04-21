@@ -3,8 +3,7 @@ package application.services;
 import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidEmailException;
 import application.models.Client;
-import application.repositories.ClientRepository;
-import application.services.ValidationService; 
+import application.repositories.ClientRepository; 
 
 /**
  * The ClientService class provides business operations for managing Client objects.
