@@ -5,9 +5,12 @@ import java.time.LocalDate;
 import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidRentalDatesException;
+import application.exceptions.InvalidEmailException;
 
 import application.models.Car;
 import application.models.Client;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 /**
@@ -16,34 +19,46 @@ import application.models.Client;
  */
 public class ValidationService {
 
-    /**
-     * Validates the client data to ensure that required fields are filled correctly.
-     * <p>
-     * This method checks that:
-     * <ul>
-     *   <li>The client's name is not null or empty.</li>
-     *   <li>The client's email is not null or empty.</li>
-     *   <li>The client's email contains an '@' symbol (basic email format check).</li>
-     * </ul>
-     * 
-     * @param client the Client object whose data is to be validated.
-     * @throws InvalidClientDataException if the client name or email is missing or in an invalid format.
-     */
-    public static void validateClientData(Client client) throws InvalidClientDataException {
-        // Check that the client's name is not null or empty.
-        if (client.getName() == null || client.getName().isEmpty()) {
-            throw new InvalidClientDataException("Client name cannot be empty.");
-        }
-        // Check that the client's email is not null or empty.
-        if (client.getEmail() == null || client.getEmail().isEmpty()) {
-            throw new InvalidClientDataException("Client email cannot be empty.");
-        }
-        // Additional check: email should contain '@' symbol.
-        if (!client.getEmail().contains("@")) {
-            throw new InvalidClientDataException("Invalid email format.");
-        }
-    }
+    import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
+// Regular expression for validating an email address.
+private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
+// Compiled Pattern object with case-insensitive flag.
+private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+
+/**
+ * Combined method that validates both the client data and the email format.
+ * <p>
+ * This method performs the following checks:
+ * <ul>
+ *   <li>The client's name must not be null or empty.</li>
+ *   <li>The client's email must not be null or empty.</li>
+ *   <li>The client's email must match the specified email pattern.</li>
+ * </ul>
+ *
+ * @param client the Client object whose data is to be validated.
+ * @throws InvalidClientDataException if the client name or email is missing.
+ * @throws InvalidEmailException if the email format is invalid.
+ */
+public static void validateClientData(Client client) throws InvalidClientDataException, InvalidEmailException {
+    // Check that the client's name is not null or empty.
+    if (client.getName() == null || client.getName().trim().isEmpty()) {
+        throw new InvalidClientDataException("Client name cannot be empty.");
+    }
+    
+    // Retrieve and validate the client's email.
+    String email = client.getEmail();
+    if (email == null || email.trim().isEmpty()) {
+        throw new InvalidClientDataException("Client email cannot be empty.");
+    }
+    
+    // Validate the email format using the regex pattern.
+    Matcher matcher = EMAIL_PATTERN.matcher(email);
+    if (!matcher.matches()) {
+        throw new InvalidEmailException("Invalid email format: " + email);
+    }
+}
     /**
      * Validates the rental dates provided by the client.
      * <p>
