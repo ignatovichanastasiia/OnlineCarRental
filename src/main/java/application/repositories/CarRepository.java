@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 import application.models.Car;
@@ -28,7 +27,7 @@ public class CarRepository implements Serializable {
     private List<Car> carList = new ArrayList<>();
     
     
-//    CONSTRUCTOR W Connection
+//TODO FOR GOOD TIME  CONSTRUCTOR W Connection
     public CarRepository(Connection connection) {
 		// TODO Auto-generated constructor stub
 	}
@@ -49,6 +48,7 @@ public class CarRepository implements Serializable {
      * @return the Car with the matching id, or null if not found.
      */
     public Car getCarById(int id) {
+//TODO NOW
 //        for (Car car : carList) {
 //            if (car.getId() == id)
 //                return car;
@@ -90,7 +90,7 @@ public class CarRepository implements Serializable {
      * @param id the unique identifier of the Car to be deleted.
      */
     public void deleteCar(int id) {
-//        carList.removeIf(car -> car.getId() == id);
+//TODO NOW        carList.removeIf(car -> car.getId() == id);
     }
     
     /**
@@ -215,7 +215,6 @@ public class CarRepository implements Serializable {
     }
     
     /**
-
      * Saves the current list of cars to a file.
      *
      * @param filename the file path where the car list will be saved.
