@@ -13,6 +13,8 @@ import java.util.List;
 import java.io.*;
 import java.util.stream.Collectors;
 
+import application.models.Rental;
+
 /**
  * The RentalRepository class provides CRUD operations for managing Rental records.
  * It maintains an in-memory list of Rental objects and supports operations

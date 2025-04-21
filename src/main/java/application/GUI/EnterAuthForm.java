@@ -3,7 +3,6 @@ package application.GUI;
 import java.io.IOException;
 
 import application.controllers.AppContext;
-import application.controllers.CarSelectionFormController;
 import application.controllers.EnterAuthFormController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,15 +12,15 @@ import javafx.stage.Stage;
 
 public class EnterAuthForm {
 
-	public void startClientForm(Stage primaryStage) {
+	public void startEnterAuthForm(Stage primaryStage) {
 		try {
 			
 			
 			AppContext context = new AppContext(); // init
 		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_enter_auth_form.fxml"));
 		    loader.setControllerFactory(param -> {
-		        if (param == CarSelectionFormController.class) {
-		            return new EnterAuthFormController(context.getCarService(),context.getClientService(),context.getRentalService());
+		        if (param == EnterAuthFormController.class) {
+		            return new EnterAuthFormController(context, context.getCarService(),context.getShopService(),context.getRentalService());
 		        }
 		        try {
 		            return param.getDeclaredConstructor().newInstance();
@@ -44,3 +43,5 @@ public class EnterAuthForm {
 	}
 
 }
+
+//	public CarSelectionFormController(CarService carService, ShopService shopService, RentalService rentalService)

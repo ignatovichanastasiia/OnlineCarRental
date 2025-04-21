@@ -30,8 +30,7 @@ public class Rental implements Serializable {
      * @param pickUpLocation   the location where the car is picked up
      * @param shop		       the location where the car is delivered
      */
-    public Rental(Client client, Car car, Date rentalStartDate, Date rentalEndDate,
-                  String pickUpLocation, String shop) {
+    public Rental(Client client) {
         // Generate a unique ID using the first two letters of the class name (e.g., "Rental" -> "Re")
         // and a counter formatted as a three-digit number.
         String className = getClass().getSimpleName();
@@ -39,11 +38,11 @@ public class Rental implements Serializable {
         this.id = String.format("%s-%03d", prefix, counter++);
         
         this.client = client;
-        this.car = car;
-        this.rentalStartDate = rentalStartDate;
-        this.rentalEndDate = rentalEndDate;
-        this.pickUpLocation = pickUpLocation;
-        this.shop = shop;
+        this.car = null;
+        this.rentalStartDate = null;
+        this.rentalEndDate = null;
+        this.pickUpLocation = null;
+        this.shop = null;
     }
     
     /**
