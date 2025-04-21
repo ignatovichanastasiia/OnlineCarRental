@@ -1,6 +1,6 @@
 package application.services;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidRentalDatesException;
@@ -47,7 +47,7 @@ public class RentalService {
      * @param startDate the start date of the rental period.
      * @param endDate   the end date of the rental period.
      */
-    public void createRentalRecord(Client client, Car car, Date startDate, Date endDate) {
+    public void createRentalRecord(Client client, Car car, LocalDate startDate, LocalDate endDate) {
         try {
             // Validate rental dates and car availability.
             ValidationService.validateRentalDates(startDate, endDate);
