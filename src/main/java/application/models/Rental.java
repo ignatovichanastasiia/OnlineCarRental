@@ -24,11 +24,6 @@ public class Rental implements Serializable {
      * Constructs a new Rental with the specified details.
      *
      * @param client           the client renting the car
-     * @param car              the car to be rented
-     * @param rentalStartDate  the start date of the rental period
-     * @param rentalEndDate    the end date of the rental period
-     * @param pickUpLocation   the location where the car is picked up
-     * @param shop		       the location where the car is delivered
      */
     public Rental(Client client) {
         // Generate a unique ID using the first two letters of the class name (e.g., "Rental" -> "Re")
@@ -168,21 +163,13 @@ public class Rental implements Serializable {
      *
      * @return a String summarizing the rental details.
      */
-<<<<<<< HEAD
-	@Override
-	public String toString() {
-		return "Rental [id=" + id + ", client=" + client + ", car=" + car + ", rentalStartDate=" + rentalStartDate
-				+ ", rentalEndDate=" + rentalEndDate + ", pickUpLocation=" + pickUpLocation + ", shop=" + shop + "]";
-	}
-    
-}
-=======
+
     @Override
     public String toString() {
         return "Rental{" +
                "id='" + id + '\'' +
                ", client=" + (client != null ? client.getName() : "null") +
-               ", car=" + (car != null ? car.getMake() + " " + car.getModel() : "null") +
+               ", car=" + (car != null ? car.getBrand() + " " + car.getModel() : "null") +
                ", rentalStartDate=" + rentalStartDate +
                ", rentalEndDate=" + rentalEndDate +
                ", pickUpLocation='" + pickUpLocation + '\'' +
@@ -190,4 +177,3 @@ public class Rental implements Serializable {
                '}';
     }
 }
->>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
