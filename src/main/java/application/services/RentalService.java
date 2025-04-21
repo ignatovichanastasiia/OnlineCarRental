@@ -8,8 +8,7 @@ import application.models.Car;
 import application.models.Client;
 import application.models.Rental;
 import application.repositories.CarRepository;
-import application.repositories.RentalRepository;
-import application.services.ValidationService; 
+import application.repositories.RentalRepository; 
 
 /**
  * The RentalService class provides business logic for managing Rental records.

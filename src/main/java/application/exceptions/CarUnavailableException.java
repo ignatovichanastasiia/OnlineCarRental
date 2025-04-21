@@ -7,7 +7,6 @@ package application.exceptions;
  */
 public class CarUnavailableException extends Exception {
 
-<<<<<<< HEAD
 	/**
 	 * Constructs a new CarUnavailableException with {@code null} as its detail
 	 * message.
@@ -15,15 +14,6 @@ public class CarUnavailableException extends Exception {
 	public CarUnavailableException() {
 		super();
 	}
-=======
-
-    /**
-     * Constructs a new CarUnavailableException with {@code null} as its detail message.
-     */
-    public CarUnavailableException() {
-        super();
-    }
->>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
 
 	/**
 	 * Constructs a new CarUnavailableException with the specified detail message.
@@ -45,7 +35,6 @@ public class CarUnavailableException extends Exception {
 		super(message, cause);
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Constructs a new CarUnavailableException with the specified cause.
 	 *
@@ -54,16 +43,5 @@ public class CarUnavailableException extends Exception {
 	public CarUnavailableException(Throwable cause) {
 		super(cause);
 	}
-=======
-    /**
-     * Constructs a new CarUnavailableException with the specified cause.
-     *
-     * @param cause the cause of the exception.
-     */
-    public CarUnavailableException(Throwable cause) {
-        super(cause);
-    }
-
->>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
 }
 
