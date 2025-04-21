@@ -1,7 +1,6 @@
 package application.controllers;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import application.repositories.CarRepository;
@@ -36,7 +35,7 @@ public class AppContext {
 	public AppContext() {
 		try {
 			// TODO 
-			H2 FOR GOOD TIME
+//			H2 FOR GOOD TIME
 //			this.connection = DriverManager.getConnection("jdbc:h2:~/onlinecarrental", "sa", "");
 
 			// repo

@@ -1,6 +1,5 @@
 package application.repositories;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +7,12 @@ import application.models.Shop;
 
 //ЗАГЛУШКА!! 
 
-//TODO
+//TODO NOW!
 
 public class ShopRepository {
 	private List<Shop> shops;
 	
-	public ShopRepository(Connection connection){
+	public ShopRepository(){
 	shops = new ArrayList<>();
 	//String name, String city, String address
 	shops.add(new Shop("SellMotorsTelAviv","Tel-Aviv","Gde-to Tam,50"));

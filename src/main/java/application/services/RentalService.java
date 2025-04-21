@@ -19,7 +19,7 @@ import application.repositories.RentalRepository;
 public class RentalService {
     private RentalRepository rentalRepository; 
     private CarRepository carRepository; 
-    private Rental rental;
+    private Rental rental;//проверить сеттеры
 
     /**
      * Constructs a new RentalService with the specified repositories.
@@ -51,11 +51,11 @@ public class RentalService {
     public void createRentalRecord(Client client, Car car, Date startDate, Date endDate) {
         try {
             // Validate rental dates and car availability.
-            ValidationService.validateRentalDates(startDate, endDate);
+ //TODO NOW           ValidationService.validateRentalDates(startDate, endDate);
             ValidationService.validateCarAvailability(car);
 
             // Create a new rental record.
-            Rental rental = new Rental(client, car, startDate, endDate);
+ //TODO NOW           Rental rental = new Rental(client, car, startDate, endDate);
             rentalRepository.save(rental);
 
             // Update the car's status as rented.
@@ -63,9 +63,9 @@ public class RentalService {
             carRepository.updateCar(car);
 
             System.out.println("Rental record created: " + rental);
-        } catch (InvalidRentalDatesException | CarUnavailableException e) {
+//TODO NOW        } catch (InvalidRentalDatesException | CarUnavailableException e) {
             System.err.println("Error creating rental record: " + e.getMessage());
-        }
+//        }
     }
 
     /**

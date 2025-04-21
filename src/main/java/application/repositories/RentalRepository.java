@@ -6,12 +6,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-
-import java.io.*;
-import java.util.stream.Collectors;
 
 import application.models.Rental;
 
@@ -36,20 +32,6 @@ public class RentalRepository implements Serializable {
         rentalList.add(rental);
     }
 
-    /**
-     * Retrieves a Rental record by its unique identifier.
-     *
-     * @param id the unique identifier of the Rental.
-     * @return the Rental object matching the given id, or null if not found.
-     */
-    public Rental getRentalById(int id) {
-        for (Rental rental : rentalList) {
-            if (rental.getId() == id) {
-                return rental;
-            }
-        }
-        return null;
-    }
 
     /**
      * Updates an existing Rental record in the repository.
@@ -65,16 +47,6 @@ public class RentalRepository implements Serializable {
         }
     }
 
-    /**
-     * Deletes a Rental record from the repository using its unique identifier.
-     *
-     * @param id the unique identifier of the Rental to be deleted.
-     */
-    public void deleteRental(int id) {
-        rentalList.removeIf(rental -> rental.getId() == id);
-    }
-
-<<<<<<< HEAD
 	/**
 	 * Retrieves a Rental record by its unique identifier.
 	 *
@@ -90,7 +62,7 @@ public class RentalRepository implements Serializable {
 		}
 		return null;
 	}
-=======
+
     /**
      * Saves the current rental list to a file using serialization.
      *
@@ -104,7 +76,6 @@ public class RentalRepository implements Serializable {
             System.err.println("Error saving rental data: " + e.getMessage());
         }
     }
->>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
 
     /**
      * Loads the rental list from a file using deserialization.
@@ -121,16 +92,15 @@ public class RentalRepository implements Serializable {
         }
     }
 
-<<<<<<< HEAD
 	/**
 	 * Deletes a Rental record from the repository using its unique identifier.
 	 *
 	 * @param id the unique identifier of the Rental to be deleted.
 	 */
 	public void deleteRental(int id) {
-//		rentalList.removeIf(rental -> rental.getId() == id);
+//TODO NOW!		rentalList.removeIf(rental -> rental.getId() == id);
 	}
-=======
+
     /**
      * Retrieves the complete list of Rental records stored in the repository.
      *
@@ -139,6 +109,4 @@ public class RentalRepository implements Serializable {
     public List<Rental> getAllRentals() {
         return rentalList;
     }
->>>>>>> branch 'Anat' of https://github.com/Johntarakay/OnlineCarRental.git
-
 }
