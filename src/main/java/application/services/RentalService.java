@@ -1,4 +1,3 @@
-
 package application.services;
 
 import java.util.Date;
@@ -10,6 +9,7 @@ import application.models.Client;
 import application.models.Rental;
 import application.repositories.CarRepository;
 import application.repositories.RentalRepository;
+import application.services.ValidationService; 
 
 /**
  * The RentalService class provides business logic for managing Rental records.
@@ -19,7 +19,6 @@ import application.repositories.RentalRepository;
 public class RentalService {
     private RentalRepository rentalRepository; 
     private CarRepository carRepository; 
-    private Rental rental;//проверить сеттеры
 
     /**
      * Constructs a new RentalService with the specified repositories.
@@ -51,11 +50,13 @@ public class RentalService {
     public void createRentalRecord(Client client, Car car, Date startDate, Date endDate) {
         try {
             // Validate rental dates and car availability.
- //TODO NOW           ValidationService.validateRentalDates(startDate, endDate);
+            ValidationService.validateRentalDates(startDate, endDate);
             ValidationService.validateCarAvailability(car);
 
             // Create a new rental record.
- //TODO NOW           Rental rental = new Rental(client, car, startDate, endDate);
+            Rental rental = new Rental(client);
+            
+            // Save the rental record.
             rentalRepository.save(rental);
 
             // Update the car's status as rented.
@@ -63,9 +64,9 @@ public class RentalService {
             carRepository.updateCar(car);
 
             System.out.println("Rental record created: " + rental);
-//TODO NOW        } catch (InvalidRentalDatesException | CarUnavailableException e) {
+        } catch (InvalidRentalDatesException | CarUnavailableException e) {
             System.err.println("Error creating rental record: " + e.getMessage());
-//        }
+        }
     }
 
     /**

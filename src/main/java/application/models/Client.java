@@ -2,7 +2,11 @@ package application.models;
 
 import java.io.Serializable;
 
+import application.exceptions.InvalidClientDataException;
+import application.exceptions.InvalidCreditCardNumberException;
+import application.exceptions.InvalidDriversLicenseNumberException;
 import application.exceptions.InvalidEmailException;
+import application.exceptions.InvalidIdentityNumberException;
 import application.services.ValidationService;
 
 /**
@@ -14,8 +18,7 @@ import application.services.ValidationService;
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
 
-//    CH
-
+    // Unique counter for client IDs
     private static int counter = 1;
     private String id;
     private String name;
@@ -24,29 +27,38 @@ public class Client implements Serializable {
     private String creditCardNumber;
     private String email;
     private String phone;
-    
+
     /**
      * Constructs a new Client with the specified details.
      *
-     * @param name                 the full name of the client
-
-     * @param email                the client's email address
-     * @param phone                the client's phone number
+     * @param name  the full name of the client.
+     * @param email the client's email address.
+     * @param phone the client's phone number.
+     * @throws InvalidEmailException if the email format is invalid.
+     * @throws InvalidClientDataException if any required client data is invalid.
      */
-    
-    //MY CH
-    public Client(String name, String email, String phone) {
-
+    public Client(String name, String email, String phone)
+            throws InvalidClientDataException, InvalidEmailException {
+        // Generate unique client ID using the first two letters of the class name and a counter.
         String className = getClass().getSimpleName();
         String prefix = className.length() >= 2 ? className.substring(0, 2) : className;
         this.id = String.format("%s-%03d", prefix, counter++);
-        validateClientData(Client client);
+
+        // Validate and set fields that are required in the constructor.
+        ValidationService.validateName(name);
+        ValidationService.validateEmail(email);
+        ValidationService.validatePhone(phone);
+
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+
+        // These fields will be set via their setters and validated individually.
         this.identityNumber = null;
         this.driversLicenseNumber = null;
         this.creditCardNumber = null;
-        this.phone = phone;
     }
-    
+
     /**
      * Returns the unique identifier of the client.
      *
@@ -55,7 +67,7 @@ public class Client implements Serializable {
     public String getId() {
         return id;
     }
-    
+
     /**
      * Returns the full name of the client.
      *
@@ -64,16 +76,18 @@ public class Client implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     /**
      * Sets the full name of the client.
      *
      * @param name the new full name to be set.
+     * @throws InvalidClientDataException if the name is invalid.
      */
-    public void setName(String name) {
+    public void setName(String name) throws InvalidClientDataException {
+        ValidationService.validateName(name);
         this.name = name;
     }
-    
+
     /**
      * Returns the client's identity number.
      *
@@ -82,16 +96,18 @@ public class Client implements Serializable {
     public String getIdentityNumber() {
         return identityNumber;
     }
-    
-    /**
-     * Sets the client's identity number.
-     *
-     * @param identityNumber the identity number to be set.
-     */
-    public void setIdentityNumber(String identityNumber) {
-        this.identityNumber = identityNumber;
-    }
-    
+
+ /**
+  * Sets the client's identity number after validating it.
+  *
+  * @param identityNumber the identity number to be set.
+  * @throws InvalidIdentityNumberException if the identity number is invalid.
+  */
+ public void setIdentityNumber(String identityNumber) throws InvalidIdentityNumberException {
+     ValidationService.validateIdentityNumber(identityNumber);
+     this.identityNumber = identityNumber;
+ }
+
     /**
      * Returns the client's driver's license number.
      *
@@ -100,16 +116,18 @@ public class Client implements Serializable {
     public String getDriversLicenseNumber() {
         return driversLicenseNumber;
     }
-    
-    /**
-     * Sets the client's driver's license number.
-     *
-     * @param driversLicenseNumber the driver's license number to be set.
-     */
-    public void setDriversLicenseNumber(String driversLicenseNumber) {
-        this.driversLicenseNumber = driversLicenseNumber;
-    }
-    
+
+ /**
+  * Sets the client's driver's license number after validating it.
+  *
+  * @param driversLicenseNumber the driver's license number to be set.
+  * @throws InvalidDriversLicenseNumberException if the driver's license number is invalid.
+  */
+ public void setDriversLicenseNumber(String driversLicenseNumber) throws InvalidDriversLicenseNumberException {
+     ValidationService.validateDriversLicenseNumber(driversLicenseNumber);
+     this.driversLicenseNumber = driversLicenseNumber;
+ }
+
     /**
      * Returns the client's credit card number.
      *
@@ -118,16 +136,18 @@ public class Client implements Serializable {
     public String getCreditCardNumber() {
         return creditCardNumber;
     }
-    
-    /**
-     * Sets the client's credit card number.
-     *
-     * @param creditCardNumber the credit card number to be set.
-     */
-    public void setCreditCardNumber(String creditCardNumber) {
-        this.creditCardNumber = creditCardNumber;
-    }
-    
+
+ /**
+  * Sets the client's credit card number after validating it.
+  *
+  * @param creditCardNumber the credit card number to be set.
+  * @throws InvalidCreditCardNumberException if the credit card number is invalid.
+  */
+ public void setCreditCardNumber(String creditCardNumber) throws InvalidCreditCardNumberException {
+     ValidationService.validateCreditCardNumber(creditCardNumber);
+     this.creditCardNumber = creditCardNumber;
+ }
+
     /**
      * Returns the client's email address.
      *
@@ -136,18 +156,19 @@ public class Client implements Serializable {
     public String getEmail() {
         return email;
     }
-    
+
     /**
-     * Sets the user's email address after validating it.
+     * Sets the client's email after validating it.
      *
      * @param email the email address to set.
-     * @throws InvalidEmailException if the email address is invalid.
+     * @throws InvalidEmailException if the email format is invalid.
+     * @throws InvalidClientDataException if the email is empty.
      */
-    public void setEmail(String email) throws InvalidEmailException {
-        ValidationService.validateEmail(email); 
+    public void setEmail(String email) throws InvalidClientDataException, InvalidEmailException {
+        ValidationService.validateEmail(email);
         this.email = email;
     }
-    
+
     /**
      * Returns the client's phone number.
      *
@@ -156,16 +177,18 @@ public class Client implements Serializable {
     public String getPhone() {
         return phone;
     }
-    
+
     /**
-     * Sets the client's phone number.
+     * Sets the client's phone number after validating it.
      *
      * @param phone the phone number to be set.
+     * @throws InvalidClientDataException if the phone number is invalid.
      */
-    public void setPhone(String phone) {
+    public void setPhone(String phone) throws InvalidClientDataException {
+        ValidationService.validatePhone(phone);
         this.phone = phone;
     }
-    
+
     /**
      * Returns a string representation of this client, including the client's ID, name, and email.
      *
@@ -174,9 +197,9 @@ public class Client implements Serializable {
     @Override
     public String toString() {
         return "Client{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+               "id='" + id + '\'' +
+               ", name='" + name + '\'' +
+               ", email='" + email + '\'' +
+               '}';
     }
 }

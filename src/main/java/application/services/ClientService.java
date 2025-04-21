@@ -1,9 +1,10 @@
-
 package application.services;
 
 import application.exceptions.InvalidClientDataException;
+import application.exceptions.InvalidEmailException;
 import application.models.Client;
 import application.repositories.ClientRepository;
+import application.services.ValidationService; 
 
 /**
  * The ClientService class provides business operations for managing Client objects.
@@ -41,7 +42,7 @@ public class ClientService {
             ValidationService.validateClientData(client);
             clientRepository.save(client);
             System.out.println("Client created: " + client);
-        } catch (InvalidClientDataException e) {
+        } catch (InvalidClientDataException | InvalidEmailException e) {
             System.err.println("Error creating client: " + e.getMessage());
         }
     }
@@ -74,7 +75,7 @@ public class ClientService {
             ValidationService.validateClientData(client);
             clientRepository.updateClient(client);
             System.out.println("Client updated: " + client);
-        } catch (InvalidClientDataException e) {
+        } catch (InvalidClientDataException | InvalidEmailException e) {
             System.err.println("Error updating client: " + e.getMessage());
         }
     }
@@ -88,6 +89,4 @@ public class ClientService {
         clientRepository.deleteClient(clientId);
         System.out.println("Client deleted (ID: " + clientId + ")");
     }
-
 }
-

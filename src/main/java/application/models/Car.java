@@ -12,29 +12,13 @@ import java.io.Serializable;
  */
 public class Car implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	// Static counter to generate unique IDs for each Car instance.
 	private static int counter = 1;
-
-	// Unique identifier in the format "Ca-001", "Ca-002", etc.
 	private String id;
-
-	// The brand of the car.
 	private String brand;
-
-	// The model of the car.
 	private String model;
-
-	// The year the car was manufactured.
 	private int year;
-
-	// The daily rental price of the car.
 	private double dailyPrice;
-
-	// Indicates whether the car is available for rental.
 	private boolean isAvailable;
-
-	// A String representing the URL or path of an image for the car.
 	private String image;
 
 	/**
