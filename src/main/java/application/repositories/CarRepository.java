@@ -47,11 +47,12 @@ public class CarRepository implements Serializable {
      * @return the Car with the matching id, or null if not found.
      */
     public Car getCarById(int id) {
-//TODO NOW (STRING V INT)
-//        for (Car car : carList) {
-//            if (car.getId() == id)
-//                return car;
-//        }
+        String idStr = String.valueOf(id);
+        for (Car car : carList) {
+            if (car.getId().equals(idStr)) {
+                return car;
+            }
+        }
         return null;
     }
     
@@ -128,6 +129,18 @@ public class CarRepository implements Serializable {
                       .mapToDouble(Car::getDailyPrice)
                       .max()
                       .orElse(0.0);
+    }
+    
+    /**
+     * Retrieves a list of Car objects with a daily rental price higher than the specified minimum price.
+     *
+     * @param minPrice the minimum daily rental price.
+     * @return a list of Car objects with a daily price greater than minPrice.
+     */
+    public List<Car> getListCarByMinPrice(double minPrice) {
+        return carList.stream()
+                      .filter(car -> car.getDailyPrice() > minPrice)
+                      .collect(Collectors.toList());
     }
     
     /**

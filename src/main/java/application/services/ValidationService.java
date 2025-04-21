@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.regex.Pattern;
 import java.util.Date;
 import java.util.regex.Matcher;
+import java.util.Calendar;
+
 
 import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidClientDataException;
@@ -12,6 +14,7 @@ import application.exceptions.InvalidDriversLicenseNumberException;
 import application.exceptions.InvalidRentalDatesException;
 import application.exceptions.InvalidEmailException;
 import application.exceptions.InvalidIdentityNumberException;
+import application.exceptions.InvalidShopDataException;
 import application.models.Car;
 import application.models.Client;
 
@@ -188,6 +191,56 @@ public class ValidationService {
     }
     
     /**
+     * Validates client name (first and last name).
+     *
+     * @param firstName The client's first name.
+     * @param lastName The client's last name.
+     * @throws InvalidClientDataException if either name is null or empty.
+     */
+    public static void validateName(String firstName, String lastName) throws InvalidClientDataException {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new InvalidClientDataException("Client first name cannot be empty.");
+        }
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new InvalidClientDataException("Client last name cannot be empty.");
+        }
+    }
+
+    /**
+     * Validates card CVV.
+     *
+     * @param cardCvv The card CVV value.
+     * @throws InvalidClientDataException if the CVV is null, empty, or invalid.
+     */
+    public static void validateCvv(String cardCvv) throws InvalidClientDataException {
+        if (cardCvv == null || cardCvv.trim().isEmpty()) {
+            throw new InvalidClientDataException("Card CVV cannot be empty.");
+        }
+        if (!cardCvv.matches("\\d{3,4}")) {
+            throw new InvalidClientDataException("Card CVV must be 3 or 4 digits.");
+        }
+    }
+
+    /**
+     * Validates card expiry date (month and year).
+     *
+     * @param month The expiry month (1 to 12).
+     * @param year The expiry year.
+     * @throws InvalidClientDataException if the expiry date is invalid or in the past.
+     */
+    public static void validateCardExpiry(int month, int year) throws InvalidClientDataException {
+        if (month < 1 || month > 12) {
+            throw new InvalidClientDataException("Card expiry month must be between 1 and 12.");
+        }
+
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        if (year < currentYear) {
+            throw new InvalidClientDataException("Card expiry year cannot be in the past.");
+        }
+    }
+
+    
+    /**
      * Validates the driver's license number.
      * <p>
      * This method checks that:
@@ -206,6 +259,41 @@ public class ValidationService {
         String sanitized = driversLicenseNumber.trim();
         if (!sanitized.matches("\\d{7,9}")) {
             throw new InvalidDriversLicenseNumberException("Driver's license number must be numeric and between 7 and 9 digits.");
+        }
+    }
+    
+    /**
+     * Validates the input data for a driver's license.
+     *
+     * @param taudatZehudNumber the client's Teudat Zehut number.
+     * @param licenseNumber     the driver's license number.
+     * @param clientBirth       the client's birth date.
+     * @param dateIssue         the license issue date.
+     * @param dateExpir         the license expiry date.
+     * @throws IllegalArgumentException if any validation fails.
+     */
+    public static void validateDriversLicenseInput(String taudatZehudNumber, String licenseNumber,
+                                                     LocalDate clientBirth, LocalDate dateIssue, LocalDate dateExpir) {
+        if (taudatZehudNumber == null || taudatZehudNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("Teudat Zehut number cannot be null or empty.");
+        }
+        if (licenseNumber == null || licenseNumber.trim().isEmpty()) {
+            throw new IllegalArgumentException("License number cannot be null or empty.");
+        }
+        if (clientBirth == null) {
+            throw new IllegalArgumentException("Client birth date cannot be null.");
+        }
+        if (dateIssue == null) {
+            throw new IllegalArgumentException("Issue date cannot be null.");
+        }
+        if (dateExpir == null) {
+            throw new IllegalArgumentException("Expiry date cannot be null.");
+        }
+        if (dateIssue.isAfter(dateExpir)) {
+            throw new IllegalArgumentException("Issue date cannot be after expiry date.");
+        }
+        if (clientBirth.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("Client birth date cannot be in the future.");
         }
     }
 
@@ -253,6 +341,43 @@ public class ValidationService {
         }
         if (!car.isAvailable()) {
             throw new CarUnavailableException("Car is not available for rental.");
+        }
+    }
+    
+        /**
+         * Validates the shop name.
+         *
+         * @param name the shop name.
+         * @throws InvalidShopDataException if name is null or empty.
+         */
+        public static void validateShopName(String name) throws InvalidShopDataException {
+            if (name == null || name.trim().isEmpty()) {
+                throw new InvalidShopDataException("Shop name cannot be null or empty.");
+            }
+        }
+
+        /**
+         * Validates the shop city.
+         *
+         * @param city the city.
+         * @throws InvalidShopDataException if city is null or empty.
+         */
+        public static void validateShopCity(String city) throws InvalidShopDataException {
+            if (city == null || city.trim().isEmpty()) {
+                throw new InvalidShopDataException("City cannot be null or empty.");
+            }
+        }
+
+        /**
+         * Validates the shop address.
+         *
+         * @param address the address.
+         * @throws InvalidShopDataException if address is null or empty.
+         */
+        public static void validateShopAddress(String address) throws InvalidShopDataException {
+            if (address == null || address.trim().isEmpty()) {
+                throw new InvalidShopDataException("Address cannot be null or empty.");
+            }
         }
     }
 }
