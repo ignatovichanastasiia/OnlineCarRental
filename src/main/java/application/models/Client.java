@@ -40,11 +40,10 @@ public class Client implements Serializable {
         String className = getClass().getSimpleName();
         String prefix = className.length() >= 2 ? className.substring(0, 2) : className;
         this.id = String.format("%s-%03d", prefix, counter++);
-        this.name = name;
+        validateClientData(Client client);
         this.identityNumber = null;
         this.driversLicenseNumber = null;
         this.creditCardNumber = null;
-        setEmail(email);
         this.phone = phone;
     }
     
