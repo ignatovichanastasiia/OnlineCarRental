@@ -2,6 +2,9 @@ package application.models;
 
 import java.io.Serializable;
 
+import application.exceptions.InvalidEmailException;
+import application.services.ValidationService;
+
 /**
  * The Client class represents a customer with personal details, including name,
  * identity number, driver's license number, credit card number, email, and phone.
@@ -41,7 +44,7 @@ public class Client implements Serializable {
         this.identityNumber = null;
         this.driversLicenseNumber = null;
         this.creditCardNumber = null;
-        this.email = email;
+        setEmail(email);
         this.phone = phone;
     }
     
@@ -136,11 +139,13 @@ public class Client implements Serializable {
     }
     
     /**
-     * Sets the client's email address.
+     * Sets the user's email address after validating it.
      *
-     * @param email the email address to be set.
+     * @param email the email address to set.
+     * @throws InvalidEmailException if the email address is invalid.
      */
-    public void setEmail(String email) {
+    public void setEmail(String email) throws InvalidEmailException {
+        ValidationService.validateEmail(email); 
         this.email = email;
     }
     
