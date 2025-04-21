@@ -1,17 +1,17 @@
 package application.services;
 
 import java.time.LocalDate;
-import java.util.regex.Pattern;
 import java.util.Date;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidCreditCardNumberException;
 import application.exceptions.InvalidDriversLicenseNumberException;
-import application.exceptions.InvalidRentalDatesException;
 import application.exceptions.InvalidEmailException;
 import application.exceptions.InvalidIdentityNumberException;
+import application.exceptions.InvalidRentalDatesException;
 import application.models.Car;
 import application.models.Client;
 
