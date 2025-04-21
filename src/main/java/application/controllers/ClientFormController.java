@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import application.services.CardService;
+import application.services.RentalService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,11 +22,13 @@ import javafx.scene.control.TextField;
 
 public class ClientFormController implements Initializable {
 	private CardService cardService;
+	private RentalService rentalService;
 	private int intCardMonth;
 	private int intCardYear;
 
-	public ClientFormController(CardService cardService) {
+	public ClientFormController(CardService cardService, RentalService rentalService) {
 		this.cardService = cardService;
+		this.rentalService = rentalService;
 	}
 
 	@FXML
@@ -121,7 +124,7 @@ public class ClientFormController implements Initializable {
 		String cardCvv = cvv.getText();
 		String cardHolder = cardholder.getText();
 		
-		cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder);
+		cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder,rentalService.getRental().getClient().getId());
 		//закрыть окно 
 			
 	}

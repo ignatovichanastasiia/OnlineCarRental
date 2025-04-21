@@ -20,7 +20,7 @@ public class EnterAuthForm {
 		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_enter_auth_form.fxml"));
 		    loader.setControllerFactory(param -> {
 		        if (param == EnterAuthFormController.class) {
-		            return new EnterAuthFormController(context, context.getCarService(),context.getShopService(),context.getRentalService());
+		            return new EnterAuthFormController(context, context.getCarService(),context.getClientService(),context.getRentalService());
 		        }
 		        try {
 		            return param.getDeclaredConstructor().newInstance();
