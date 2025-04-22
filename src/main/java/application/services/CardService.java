@@ -42,7 +42,7 @@ public class CardService {
      * @throws InvalidClientDataException if any required data is missing or invalid.
      */
     public Card addCard(String strCardNumber, String clientFirstName, String clientLastName, String clientEmail,
-                        String clientPhone, String cardCvv, int intCardMonth, int intCardYear, String cardHolder)
+                        String clientPhone, String cardCvv, int intCardMonth, int intCardYear, String cardHolder, String clientAppId)
                         throws InvalidCreditCardNumberException, InvalidEmailException, InvalidClientDataException {
         
         // Perform validation by delegating to ValidationService.
@@ -55,7 +55,7 @@ public class CardService {
         
         // Create a new Card object.
         Card card = new Card(strCardNumber, clientFirstName, clientLastName, clientEmail,
-                             clientPhone, cardCvv, intCardMonth, intCardYear, cardHolder);
+                             clientPhone, cardCvv, intCardMonth, intCardYear, cardHolder, clientAppId);
         
         // Save the new card via the repository.
         cardRepository.addCard(card);
@@ -89,7 +89,7 @@ public class CardService {
         ValidationService.validatePhone(card.getPhone());
         ValidationService.validateName(card.getFirstName(), card.getLastName());
         ValidationService.validateCvv(card.getCvv());
-        ValidationService.validateCardExpiry(card.getExpiryMonth(), card.getExpiryYear());
+        ValidationService.validateCardExpiry(card.getMonth(), card.getYear());
         
         cardRepository.updateCard(card);
         return card;

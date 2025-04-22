@@ -79,6 +79,15 @@ public class Card {
 	public void setCardholder(String cardholder) {
 		this.cardholder = cardholder;
 	}
+	
+	public String getClientAppID() {
+		return clientAppID;
+	}
+	
+	public void setClientAppID(String clientAppID) {
+		this.clientAppID = clientAppID;
+	}
+	
 	@Override
 	public String toString() {
 		return "Card [number=" + number + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email

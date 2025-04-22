@@ -1,63 +1,40 @@
 package application.services;
 
-import java.time.LocalDate;
-import java.util.regex.Pattern;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.Calendar;
-
-
-import application.exceptions.CarUnavailableException;
-import application.exceptions.InvalidClientDataException;
-import application.exceptions.InvalidCreditCardNumberException;
-import application.exceptions.InvalidDriversLicenseNumberException;
-import application.exceptions.InvalidRentalDatesException;
-import application.exceptions.InvalidEmailException;
-import application.exceptions.InvalidIdentityNumberException;
-import application.exceptions.InvalidShopDataException;
-import application.models.Car;
+import application.exceptions.*;
 import application.models.Client;
+import application.models.Car;
+import java.util.regex.*;
+import java.util.*;
+import java.time.LocalDate; // Используется там, где требуется
 
 /**
- * The ValidationService class provides static methods for validating various inputs in the application.
- * It includes validations for client data, email format, rental dates (using LocalDate), 
- * and car availability.
+ * The ValidationService class provides various static methods to validate client data,
+ * identity numbers, credit card details, driver's license information, rental dates,
+ * car availability, and shop data.
  */
 public class ValidationService {
 
-    // Regular expression for validating an email address.
+    // Email regex pattern to validate email addresses.  
     private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$";
-    // Compiled Pattern object with case-insensitive flag.
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
 
     /**
-     * Combined method that validates both the client data and the email format.
-     * <p>
-     * This method performs the following checks:
-     * <ul>
-     *   <li>The client's name must not be null or empty.</li>
-     *   <li>The client's email must not be null or empty.</li>
-     *   <li>The client's email must match the specified email pattern.</li>
-     * </ul>
+     * Validates the client data.
      *
-     * @param client the Client object whose data is to be validated.
-     * @throws InvalidClientDataException if the client name or email is missing.
+     * @param client The Client object to be validated.
+     * @throws InvalidClientDataException if the client's name or email is empty.
      * @throws InvalidEmailException if the email format is invalid.
      */
     public static void validateClientData(Client client) throws InvalidClientDataException, InvalidEmailException {
-        // Validate client's name is not null or empty.
         if (client.getName() == null || client.getName().trim().isEmpty()) {
             throw new InvalidClientDataException("Client name cannot be empty.");
         }
         
-        // Retrieve the client's email.
         String email = client.getEmail();
-        // Validate that the client's email is not null or empty.
         if (email == null || email.trim().isEmpty()) {
             throw new InvalidClientDataException("Client email cannot be empty.");
         }
         
-        // Validate the email format using regex.
         Matcher matcher = EMAIL_PATTERN.matcher(email);
         if (!matcher.matches()) {
             throw new InvalidEmailException("Invalid email format: " + email);
@@ -65,9 +42,9 @@ public class ValidationService {
     }
 
     /**
-     * Validates the client name.
+     * Validates that the given name is not null or empty.
      *
-     * @param name the client name to validate.
+     * @param name The name to validate.
      * @throws InvalidClientDataException if the name is null or empty.
      */
     public static void validateName(String name) throws InvalidClientDataException {
@@ -77,11 +54,11 @@ public class ValidationService {
     }
 
     /**
-     * Validates the given email address.
+     * Validates the provided email string.
      *
-     * @param email the email address to validate.
+     * @param email The email to validate.
      * @throws InvalidClientDataException if the email is null or empty.
-     * @throws InvalidEmailException if the email format is invalid.
+     * @throws InvalidEmailException if the email doesn't match the required format.
      */
     public static void validateEmail(String email) throws InvalidClientDataException, InvalidEmailException {
         if (email == null || email.trim().isEmpty()) {
@@ -94,29 +71,24 @@ public class ValidationService {
     }
 
     /**
-     * Validates the client phone number.
+     * Validates that the provided phone number is not null or empty.
      *
-     * @param phone the client phone number to validate.
-     * @throws InvalidClientDataException if the phone is null or empty.
+     * @param phone The phone number to validate.
+     * @throws InvalidClientDataException if the phone number is null or empty.
      */
     public static void validatePhone(String phone) throws InvalidClientDataException {
         if (phone == null || phone.trim().isEmpty()) {
             throw new InvalidClientDataException("Client phone cannot be empty.");
         }
     }
-    
+
     /**
-     * Validates the identity number (Teudat Zehut).
-     * <p>
-     * This method ensures that:
-     * <ul>
-     *   <li>The identity number is not null or empty.</li>
-     *   <li>The identity number contains only digits.</li>
-     *   <li>The identity number is 9 digits long (padding with leading zeros if necessary).</li>
-     *   <li>The identity number passes the checksum validation using the standard algorithm.</li>
-     * </ul>
+     * Validates the given identity number.
      *
-     * @param identityNumber the identity number to validate.
+     * This method removes all non-digit characters, pads with leading zeros to 9 digits if necessary,
+     * and then uses a checksum algorithm to validate the identity number.
+     *
+     * @param identityNumber The identity number to validate.
      * @throws InvalidIdentityNumberException if the identity number is invalid.
      */
     public static void validateIdentityNumber(String identityNumber) throws InvalidIdentityNumberException {
@@ -134,7 +106,6 @@ public class ValidationService {
             throw new InvalidIdentityNumberException("Identity number must be 9 digits long.");
         }
         
-        // Validate using the checksum algorithm.
         int sum = 0;
         for (int i = 0; i < 9; i++) {
             int digit = Character.getNumericValue(sanitized.charAt(i));
@@ -149,19 +120,13 @@ public class ValidationService {
             throw new InvalidIdentityNumberException("Invalid identity number.");
         }
     }
-    
+
     /**
      * Validates the credit card number using the Luhn algorithm.
-     * <p>
-     * This method ensures that:
-     * <ul>
-     *   <li>The credit card number is not null or empty.</li>
-     *   <li>The credit card number contains only numeric characters (after removing spaces).</li>
-     *   <li>The credit card number passes the Luhn checksum algorithm.</li>
-     * </ul>
      *
-     * @param creditCardNumber the credit card number to validate.
-     * @throws InvalidCreditCardNumberException if the credit card number is null, empty, non-numeric, or invalid.
+     * @param creditCardNumber The credit card number to validate.
+     * @throws InvalidCreditCardNumberException if the credit card number is empty, non-numeric,
+     *         or fails the Luhn checksum.
      */
     public static void validateCreditCardNumber(String creditCardNumber) throws InvalidCreditCardNumberException {
         if (creditCardNumber == null || creditCardNumber.trim().isEmpty()) {
@@ -189,13 +154,13 @@ public class ValidationService {
             throw new InvalidCreditCardNumberException("Invalid credit card number.");
         }
     }
-    
+
     /**
-     * Validates client name (first and last name).
+     * Validates that both first name and last name are not null or empty.
      *
      * @param firstName The client's first name.
      * @param lastName The client's last name.
-     * @throws InvalidClientDataException if either name is null or empty.
+     * @throws InvalidClientDataException if either first name or last name is empty.
      */
     public static void validateName(String firstName, String lastName) throws InvalidClientDataException {
         if (firstName == null || firstName.trim().isEmpty()) {
@@ -207,10 +172,10 @@ public class ValidationService {
     }
 
     /**
-     * Validates card CVV.
+     * Validates the card CVV.
      *
-     * @param cardCvv The card CVV value.
-     * @throws InvalidClientDataException if the CVV is null, empty, or invalid.
+     * @param cardCvv The card CVV to validate.
+     * @throws InvalidClientDataException if the CVV is empty or does not consist of 3 or 4 digits.
      */
     public static void validateCvv(String cardCvv) throws InvalidClientDataException {
         if (cardCvv == null || cardCvv.trim().isEmpty()) {
@@ -222,35 +187,28 @@ public class ValidationService {
     }
 
     /**
-     * Validates card expiry date (month and year).
+     * Validates the card expiry date components.
      *
-     * @param month The expiry month (1 to 12).
-     * @param year The expiry year.
-     * @throws InvalidClientDataException if the expiry date is invalid or in the past.
+     * @param month The expiry month (should be between 1 and 12).
+     * @param year The expiry year (should not be in the past).
+     * @throws InvalidClientDataException if the month is out of range or the year is in the past.
      */
     public static void validateCardExpiry(int month, int year) throws InvalidClientDataException {
         if (month < 1 || month > 12) {
             throw new InvalidClientDataException("Card expiry month must be between 1 and 12.");
         }
-
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         if (year < currentYear) {
             throw new InvalidClientDataException("Card expiry year cannot be in the past.");
         }
     }
 
-    
     /**
      * Validates the driver's license number.
-     * <p>
-     * This method checks that:
-     * <ul>
-     *   <li>The driver's license number is not null or empty.</li>
-     *   <li>The driver's license number matches the required format (numeric and 7 to 9 digits).</li>
-     * </ul>
      *
-     * @param driversLicenseNumber the driver's license number to validate.
-     * @throws InvalidDriversLicenseNumberException if the driver's license number is invalid.
+     * @param driversLicenseNumber The driver's license number to validate.
+     * @throws InvalidDriversLicenseNumberException if the driver's license number is empty,
+     *         non-numeric, or does not contain between 7 and 9 digits.
      */
     public static void validateDriversLicenseNumber(String driversLicenseNumber) throws InvalidDriversLicenseNumberException {
         if (driversLicenseNumber == null || driversLicenseNumber.trim().isEmpty()) {
@@ -261,16 +219,16 @@ public class ValidationService {
             throw new InvalidDriversLicenseNumberException("Driver's license number must be numeric and between 7 and 9 digits.");
         }
     }
-    
+
     /**
-     * Validates the input data for a driver's license.
+     * Validates the drivers license input data.
      *
-     * @param taudatZehudNumber the client's Teudat Zehut number.
-     * @param licenseNumber     the driver's license number.
-     * @param clientBirth       the client's birth date.
-     * @param dateIssue         the license issue date.
-     * @param dateExpir         the license expiry date.
-     * @throws IllegalArgumentException if any validation fails.
+     * @param taudatZehudNumber The Teudat Zehut number (ID).
+     * @param licenseNumber The driver's license number.
+     * @param clientBirth The client's birth date.
+     * @param dateIssue The date on which the license was issued.
+     * @param dateExpir The expiry date of the license.
+     * @throws IllegalArgumentException if any required data is null or if dates are inconsistent.
      */
     public static void validateDriversLicenseInput(String taudatZehudNumber, String licenseNumber,
                                                      LocalDate clientBirth, LocalDate dateIssue, LocalDate dateExpir) {
@@ -298,42 +256,33 @@ public class ValidationService {
     }
 
     /**
-     * Validates the rental dates provided by the client.
-     * <p>
-     * This method performs the following checks:
-     * <ul>
-     *   <li>Both the start and end dates are not null.</li>
-     *   <li>The rental start date is before the rental end date.</li>
-     *   <li>The rental start date is not in the past compared to today's date.</li>
-     * </ul>
+     * Validates the rental dates.
      *
-     * @param startDate the rental start date.
-     * @param endDate the rental end date.
-     * @throws InvalidRentalDatesException if any of the date validations fail.
+     * This method ensures that both start and end dates are not null, that the start date
+     * is before the end date, and that the start date is not in the past relative to the current time.
+     *
+     * @param startDate The rental start date.
+     * @param endDate The rental end date.
+     * @throws InvalidRentalDatesException if the dates are invalid.
      */
-    public static void validateRentalDates(Date startDate, Date endDate)
-            throws InvalidRentalDatesException {
-        // Ensure both dates are not null.
+    public static void validateRentalDates(Date startDate, Date endDate) throws InvalidRentalDatesException {
         if (startDate == null || endDate == null) {
             throw new InvalidRentalDatesException("Rental dates cannot be null.");
         }
-        // Ensure the start date is before the end date.
-        if (endDate.isBefore(startDate)) {
+        if (startDate.after(endDate)) {
             throw new InvalidRentalDatesException("The rental start date must be before the end date.");
         }
-        // Ensure the start date is not in the past relative to today.
-        if (startDate.isBefore(LocalDate.now())) {
+        Date today = new Date();
+        if (startDate.before(today)) {
             throw new InvalidRentalDatesException("The rental start date cannot be in the past.");
         }
     }
 
     /**
-     * Validates that a car is available for rental.
-     * <p>
-     * This method checks that the car is not null and its availability status is true.
+     * Validates the availability of a car.
      *
-     * @param car the Car object to be validated.
-     * @throws CarUnavailableException if the car is null or not available.
+     * @param car The car to check for availability.
+     * @throws CarUnavailableException if the car is not found or is not available for rental.
      */
     public static void validateCarAvailability(Car car) throws CarUnavailableException {
         if (car == null) {
@@ -343,41 +292,40 @@ public class ValidationService {
             throw new CarUnavailableException("Car is not available for rental.");
         }
     }
-    
-        /**
-         * Validates the shop name.
-         *
-         * @param name the shop name.
-         * @throws InvalidShopDataException if name is null or empty.
-         */
-        public static void validateShopName(String name) throws InvalidShopDataException {
-            if (name == null || name.trim().isEmpty()) {
-                throw new InvalidShopDataException("Shop name cannot be null or empty.");
-            }
-        }
 
-        /**
-         * Validates the shop city.
-         *
-         * @param city the city.
-         * @throws InvalidShopDataException if city is null or empty.
-         */
-        public static void validateShopCity(String city) throws InvalidShopDataException {
-            if (city == null || city.trim().isEmpty()) {
-                throw new InvalidShopDataException("City cannot be null or empty.");
-            }
+    /**
+     * Validates that the shop name is not null or empty.
+     *
+     * @param name The shop name.
+     * @throws InvalidShopDataException if the shop name is null or empty.
+     */
+    public static void validateShopName(String name) throws InvalidShopDataException {
+        if (name == null || name.trim().isEmpty()) {
+            throw new InvalidShopDataException("Shop name cannot be null or empty.");
         }
+    }
 
-        /**
-         * Validates the shop address.
-         *
-         * @param address the address.
-         * @throws InvalidShopDataException if address is null or empty.
-         */
-        public static void validateShopAddress(String address) throws InvalidShopDataException {
-            if (address == null || address.trim().isEmpty()) {
-                throw new InvalidShopDataException("Address cannot be null or empty.");
-            }
+    /**
+     * Validates that the shop city is not null or empty.
+     *
+     * @param city The shop city.
+     * @throws InvalidShopDataException if the city is null or empty.
+     */
+    public static void validateShopCity(String city) throws InvalidShopDataException {
+        if (city == null || city.trim().isEmpty()) {
+            throw new InvalidShopDataException("City cannot be null or empty.");
+        }
+    }
+
+    /**
+     * Validates that the shop address is not null or empty.
+     *
+     * @param address The shop address.
+     * @throws InvalidShopDataException if the address is null or empty.
+     */
+    public static void validateShopAddress(String address) throws InvalidShopDataException {
+        if (address == null || address.trim().isEmpty()) {
+            throw new InvalidShopDataException("Address cannot be null or empty.");
         }
     }
 }
