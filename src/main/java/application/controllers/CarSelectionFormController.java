@@ -8,7 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import application.GUI.DriversLicenseForm;
 import application.models.Car;
+import application.models.Rental;
 import application.repositories.CarRepository;
 import application.services.CarService;
 import application.services.RentalService;
@@ -19,6 +21,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -26,6 +30,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.stage.Stage;
 
 public class CarSelectionFormController implements Initializable {
 	// Service classes
@@ -72,6 +78,18 @@ public class CarSelectionFormController implements Initializable {
 	private String point;
 	private LocalDate localDateFrom;
 	private LocalDate localDateTo;
+	private StringBuilder sb;
+	
+	//main frame (pane)
+    @FXML 
+    private Accordion accordion;
+    @FXML 
+    private TitledPane filtersPane;
+    @FXML 
+    private TitledPane carsPane;
+    @FXML 
+    private TitledPane extraPane;
+    
 
 	// filters
 	@FXML
@@ -122,7 +140,7 @@ public class CarSelectionFormController implements Initializable {
 
 	// extra services
 	@FXML
-	private String pickUpAddress;
+	private TextField pickUpAddress;
 
 	@FXML
 	private CheckBox insurance;
@@ -144,12 +162,32 @@ public class CarSelectionFormController implements Initializable {
 
 	@FXML
 	private CheckBox tank;
+	
+	@FXML
+	Label coleteInfoLabel;
 
 	@FXML
 	private Button complete;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//prepare accordion
+		accordion.setExpandedPane(filtersPane);
+		accordion.expandedPaneProperty().addListener((obs, oldPane, newPane) -> {
+	        if (newPane != null) {
+	            if (newPane == carsPane) {
+	                String max = maxPrice.getText();
+	                if(!max.isBlank()) {
+	                	getClientMaxPrice();
+	                }
+	                String min = minPrice.getText();
+	                if(!min.isBlank()) {
+	                	getClientMinPrice();
+	                }
+	            }
+	        }
+	    });
+		
 		// prepare cities CBox
 		ObservableList<String> citiesItems = FXCollections.observableArrayList(citiesList);
 		cities.setItems(citiesItems);
@@ -178,7 +216,14 @@ public class CarSelectionFormController implements Initializable {
 		maxPrice.setPromptText("Max price is " + carService.getMaxPrice());
 		//prepare list of cars
 		carsList.setItems(FXCollections.observableArrayList(allCars));
-		// TODO EXTRA NOW!!!
+		//EXTRA
+		sb = new StringBuilder();
+		sb.append("Extra services: ");		
+		
+		 complete.setOnAction(ev -> {
+		        System.out.println("Click to complete!");
+		        clickComplete(ev);
+		    });
 	}
 
 	public void getCitiesChoice(ActionEvent e) {
@@ -197,6 +242,7 @@ public class CarSelectionFormController implements Initializable {
 		System.out.println("POINT. There is no software logic here now, but in the future this choice will affect "
 				+ "\nthe list of cars, since each point of sale has its own list of cars.");
 		point = points.getValue();
+		rentalService.getCurrentRental().setShop(point);
 	}
 
 	public void getDrivingYearsChoice(ActionEvent e) {
@@ -260,29 +306,85 @@ public class CarSelectionFormController implements Initializable {
 	}
 
 	public void getDateEndRental(ActionEvent e) {
-		System.out.println("Here we need logic with prof dates");
 		localDateTo = dateTo.getValue();
 		try {
 			ValidationService.validateRentalDates(localDateFrom, localDateTo);
+			rentalService.getCurrentRental().setRentalStartDate(localDateFrom);
+			rentalService.getCurrentRental().setRentalEndDate(localDateTo);
 		} catch (Exception exep) {
 			String error = "Dates are not valid";
 			System.out.println(error);
 			dateFromLabel.setText(error);
+			dateFromLabel.setStyle("-fx-text-fill: red;");
 			dateToLabel.setText(error);
+			dateToLabel.setStyle("-fx-text-fill: red;");
 			return;
 		}
+		
 	}
 	
 	public void clickComplete(ActionEvent e) {
-		//TODO NOW!!! 
-		//Сгребла все данные, расшвыряла сеттерами, вместо открыла права,
-		// вместо прав карту, открыла договор, заменила все на инфу! Оставила логин и пароль для клиента. 
-		//По логину открываем инфу - ok -  энтер страница или новая рентал -  то окно выбора 
+		Car selectedCar = carsList.getSelectionModel().getSelectedItem();
+		if (selectedCar != null) {
+		    System.out.println("Selected car: " + selectedCar);
+		    rentalService.getCurrentRental().setCar(selectedCar);
+		} else {
+		    System.out.println("No selected cars");
+		    coleteInfoLabel.setText("Selected machine is missing");
+		    return;
+		}
+		
+		//extra
+		if(insurance.isSelected()) {
+			sb.append("full insurance; ");
+		}
+		if(GPS.isSelected()) {
+			sb.append("GPS; ");
+		}
+		if(child.isSelected()) {
+			sb.append("child seat; ");
+		}
+		if(moreDriver.isSelected()) {
+			sb.append("second driver; ");
+		}
+		if(moreDriver.isSelected()) {
+			sb.append("second driver; ");
+		}
+		if(wifi.isSelected()) {
+			sb.append("wifi; ");
+		}
+		if(crossborder.isSelected()) {
+			sb.append("cross border; ");
+		}
+		if(tank.isSelected()) {
+			sb.append("cross border; ");
+		}
+		if(crossborder.isSelected()) {
+			sb.append("full tank; ");
+		}
+		if(!pickUpAddress.getText().isBlank()) {
+			sb.append(pickUpAddress.getText());
+		}
+		rentalService.getCurrentRental().setPickUpLocation(sb.toString());
+		
+		Rental rental = rentalService.getCurrentRental();
+		if(rental.getRentalStartDate()!=null
+				&&rental.getRentalEndDate()!=null
+				&&rental.getCar()!=null
+				&&rental.getPickUpLocation()!=null
+				&&rental.getShop()!=null) {
+			
+			//change window
+			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+			new DriversLicenseForm().startDriversLicenseForm(currentStage, context);
+			
+		}else {
+			coleteInfoLabel.setText("The required data or the selected machine is missing");
+		    return;
+		}
 	}
 	
-	
-
-	public void getMinPrice() {
+	public void getClientMinPrice() {
 		String value = minPrice.getText();
 		try {
 			double minPrice = Double.valueOf(value);
@@ -297,13 +399,13 @@ public class CarSelectionFormController implements Initializable {
 		}
 	}
 
-	public void getMaxPrice() {
+	public void getClientMaxPrice() {
 		String value = maxPrice.getText();
 		try {
-			double maxPrice = Double.valueOf(value);
-//TODO	NOW!!	List listCarByMaxPrice = carService.getListCarByMaxPrice(maxPrice);//
-//			allResearchedCarsByBrands.retainAll(listCarByMaxPrice);
-//			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
+			double maxPrice = Double.valueOf(value.trim());
+			List<Car> listCarByMaxPrice = carRepository.getListCarByMaxPrice(maxPrice);
+			allResearchedCarsByBrands.retainAll(listCarByMaxPrice);
+			carsList.setItems(FXCollections.observableArrayList(allResearchedCarsByBrands));
 		} catch (Exception e) {
 			String er = "Wrong price";
 			System.out.println(er);
@@ -313,44 +415,6 @@ public class CarSelectionFormController implements Initializable {
 }
 
 
-/*TODO
- * 
- * Надо собрать акшон с аккордиона. Назвать в скин билдере все пэйны и аккордион. А далее:
- * @FXML
-private Accordion accordion;
-
-@FXML
-private TitledPane pane1;
-
-@FXML
-private TitledPane pane2;
-
-@FXML
-private TitledPane pane3;
-
-@FXML
-public void initialize() {
-    accordion.expandedPaneProperty().addListener((obs, oldPane, newPane) -> {
-        if (newPane != null) {
-            System.out.println("Теперь открыта панель: " + newPane.getText());
-
-            // Пример логики
-            if (newPane == pane1) {
-                System.out.println("Панель 1 выбрана");
-            } else if (newPane == pane2) {
-                System.out.println("Панель 2 выбрана");
-            } else if (newPane == pane3) {
-                System.out.println("Панель 3 выбрана");
-            }
-        } else {
-            System.out.println("Ничего не выбрано (все свернуты)");
-        }
-    });
-}
- *когда открыли КАРСЫ - надо запустить лист 
- *выделить машину, сохранить ее, как КАР
- *дождаться данных с кнопки комплитед
- *
- *СДЕЛАТЬ ДОП РЕСУРСЫ!
- *
-*/
+//Сгребла все данные, расшвыряла сеттерами, вместо открыла права,
+// вместо прав карту, открыла договор, заменила все на инфу! Оставила логин и пароль для клиента. 
+//По логину открываем инфу - ok -  энтер страница или новая рентал -  то окно выбора 

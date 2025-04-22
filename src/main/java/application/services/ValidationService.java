@@ -2,7 +2,6 @@ package application.services;
 
 import java.time.LocalDate; // Используется там, где требуется
 import java.util.Calendar;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -275,15 +274,15 @@ public class ValidationService {
      * @param endDate The rental end date.
      * @throws InvalidRentalDatesException if the dates are invalid.
      */
-    public static void validateRentalDates(Date startDate, Date endDate) throws InvalidRentalDatesException {
+    public static void validateRentalDates(LocalDate startDate, LocalDate endDate) throws InvalidRentalDatesException {
         if (startDate == null || endDate == null) {
             throw new InvalidRentalDatesException("Rental dates cannot be null.");
         }
-        if (startDate.after(endDate)) {
+        if (startDate.isBefore(endDate)) {
             throw new InvalidRentalDatesException("The rental start date must be before the end date.");
         }
-        Date today = new Date();
-        if (startDate.before(today)) {
+        LocalDate today = LocalDate.now();
+        if (today.isBefore(startDate)) {
             throw new InvalidRentalDatesException("The rental start date cannot be in the past.");
         }
     }

@@ -3,6 +3,7 @@ package application.GUI;
 import java.io.IOException;
 import java.net.URL;
 
+import application.controllers.AppContext;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 public class ConfirmationForm {
 	
-	public void startConfirmationForm(Stage primaryStage) {
+	public void startConfirmationForm(Stage primaryStage,AppContext context) {
 		try {
 			URL fxmlUrl = getClass().getResource("/design_confirmation_form.fxml");
 			System.out.println("FXML URL: " + fxmlUrl);

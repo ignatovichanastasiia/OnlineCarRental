@@ -1,6 +1,7 @@
 package application.models;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -15,8 +16,9 @@ public class Rental implements Serializable {
     private String id;
     private Client client;
     private Car car;
-    private Date rentalStartDate;
-    private Date rentalEndDate;
+    private LocalDate rentalStartDate;
+    private LocalDate rentalEndDate;
+    //ВНИМАНИЕ! Здесь в стринг пик ап локэйшн вся информация о доп сервисе!
     private String pickUpLocation;
     private String shop;
     
@@ -99,7 +101,7 @@ public class Rental implements Serializable {
      *
      * @param rentalStartDate the rental start Date to set.
      */
-    public void setRentalStartDate(Date rentalStartDate) {
+    public void setRentalStartDate(LocalDate rentalStartDate) {
         this.rentalStartDate = rentalStartDate;
     }
     
@@ -108,7 +110,7 @@ public class Rental implements Serializable {
      *
      * @return the rental end Date.
      */
-    public Date getRentalEndDate() {
+    public LocalDate getRentalEndDate() {
         return rentalEndDate;
     }
     
@@ -117,7 +119,7 @@ public class Rental implements Serializable {
      *
      * @param rentalEndDate the rental end Date to set.
      */
-    public void setRentalEndDate(Date rentalEndDate) {
+    public void setRentalEndDate(LocalDate rentalEndDate) {
         this.rentalEndDate = rentalEndDate;
     }
     

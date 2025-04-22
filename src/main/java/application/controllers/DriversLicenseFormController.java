@@ -14,11 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class DriversLicenseFormController  {
+	private AppContext context;
 	private RentalService rentalService;
 	private DriversLicenseService driversLicenseService;
 	private boolean validCategory;
 	
-	public DriversLicenseFormController(RentalService rentalService, DriversLicenseService driversLicenseService) {
+	public DriversLicenseFormController(AppContext context, RentalService rentalService, DriversLicenseService driversLicenseService) {
+		this.context = context;
 		this.rentalService = rentalService;
 		this.driversLicenseService = driversLicenseService;
 	}
@@ -44,7 +46,7 @@ public class DriversLicenseFormController  {
 	
 	
 	public void checkCategory(ActionEvent e) {
-		boolean validCategory = checkBoxCategory.isSelected();
+		validCategory = checkBoxCategory.isSelected();
 	}
 	
 	public void addLicenseButtonClick(ActiveEvent e) {
@@ -58,8 +60,7 @@ public class DriversLicenseFormController  {
 		String strLicenseNumber = licenseNumber.getText();
 		LocalDate dateIssue = issueDate.getValue();
 		LocalDate dateExpir = expirationDate.getValue();
-		driversLicenseService.addDriversLicense(taudatZehudNumber,strLicenseNumber,clientBirth,dateIssue,dateExpir);
-		
+//		driversLicenseService.addDriversLicense(taudatZehudNumber,strLicenseNumber,clientBirth,dateIssue,dateExpir);
 	}
 	
 	//	public DriversLicense(String numberTZ, String id, LocalDate dateBirth, LocalDate issue,

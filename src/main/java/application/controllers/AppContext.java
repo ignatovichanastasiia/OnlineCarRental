@@ -3,11 +3,13 @@ package application.controllers;
 import application.repositories.CarRepository;
 import application.repositories.CardRepository;
 import application.repositories.ClientRepository;
+import application.repositories.DriversLicenseRepository;
 import application.repositories.RentalRepository;
 import application.repositories.ShopRepository;
 import application.services.CarService;
 import application.services.CardService;
 import application.services.ClientService;
+import application.services.DriversLicenseService;
 import application.services.RentalService;
 import application.services.ShopService;
 import application.services.ValidationService;
@@ -19,6 +21,7 @@ public class AppContext {
 	private final RentalRepository rentalRepository;
 	private final ShopRepository shopRepository;
 	private final CardRepository cardRepository;
+	private final DriversLicenseRepository driversLicenseRepository;
 
 	private final CarService carService;
 	private final ClientService clientService;
@@ -26,6 +29,7 @@ public class AppContext {
 	private final ShopService shopService;
 	private final ValidationService validationService;
 	private final CardService cardService;
+	private final DriversLicenseService driversLicenseService;
 
 	public AppContext() {
 		// repo
@@ -34,6 +38,7 @@ public class AppContext {
 		this.rentalRepository = new RentalRepository();
 		this.shopRepository = new ShopRepository();
 		this.cardRepository = new CardRepository();
+		this.driversLicenseRepository = new DriversLicenseRepository();
 
 		// services
 		this.carService = new CarService(carRepository);
@@ -41,7 +46,8 @@ public class AppContext {
 		this.rentalService = new RentalService(rentalRepository, carRepository);
 		this.shopService = new ShopService(shopRepository);
 		this.validationService = new ValidationService();
-		this.cardService = new CardService();
+		this.cardService = new CardService(cardRepository);
+		this.driversLicenseService = new DriversLicenseService(driversLicenseRepository);
 	}
 
 	public CarRepository getCarRepository() {
@@ -87,4 +93,6 @@ public class AppContext {
 	public CardService getCardService() {
 		return cardService;
 	}
+
+
 }

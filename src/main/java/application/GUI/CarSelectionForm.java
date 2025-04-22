@@ -11,34 +11,29 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class CarSelectionForm {
-	public void startCarSelectionForm(Stage stage, AppContext context) {
+	public void startCarSelectionForm(Stage primaryStage, AppContext context) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_car_selection_form.fxml"));
+			System.out.println(loader.toString());
 
-			loader.setControllerFactory(param -> {
-				if (param == CarSelectionFormController.class) {
-					return new CarSelectionFormController(context, context.getCarService(), context.getShopService(),
-							context.getRentalService());
-				}
-				try {
-					return param.getDeclaredConstructor().newInstance();
-				} catch (Exception e) {
-					throw new RuntimeException(e);
-				}
-			});
-
-			Parent root = loader.load();
+		    CarSelectionFormController controller = new CarSelectionFormController(
+		    		context, 
+		    		context.getCarService(),
+		    		context.getShopService(),
+		    		context.getRentalService());
+		    loader.setController(controller);
+		    Parent root = loader.load(); 
+		    System.out.println("THIS loader loaded: " + loader.getController());
+		    System.out.println("Controller is: " + controller);
 			Scene scene = new Scene(root);
-			stage.setTitle("Car rent app");
+			primaryStage.setTitle("Car rent app");
 			Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
-			stage.getIcons().add(icon);
-			stage.setScene(scene);
-			stage.show();
+			primaryStage.getIcons().add(icon);
+			primaryStage.setScene(scene);
+			primaryStage.show();
 
 		} catch (IOException e) {
 			System.err.println("Error opening CarSelectionForm: " + e.getMessage());
 		}
 	}
 }
-
-//ИНИТ С ПЕРЕМЕННЫМИ!!!

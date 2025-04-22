@@ -8,6 +8,10 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import application.GUI.ConfirmationForm;
+import application.exceptions.InvalidClientDataException;
+import application.exceptions.InvalidCreditCardNumberException;
+import application.exceptions.InvalidEmailException;
 import application.services.CardService;
 import application.services.RentalService;
 import javafx.collections.FXCollections;
@@ -15,18 +19,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
+import javafx.stage.Stage;
+//all ok
 public class ClientFormController implements Initializable {
+	private AppContext context;
 	private CardService cardService;
 	private RentalService rentalService;
 	private int intCardMonth;
 	private int intCardYear;
 
-	public ClientFormController(CardService cardService, RentalService rentalService) {
+	public ClientFormController(AppContext context, CardService cardService, RentalService rentalService) {
+		this.context = context;
 		this.cardService = cardService;
 		this.rentalService = rentalService;
 	}
@@ -88,6 +96,10 @@ public class ClientFormController implements Initializable {
 	    ObservableList<Integer> yearsBox = FXCollections.observableArrayList(years);
 	    cardYear.setItems(yearsBox);
 	    cardYear.setOnAction(this::getCardYear);
+	    addCard.setOnAction(event -> {
+	        System.out.println("Addcard button click!");
+	        addCard(event);
+	    });
 	}
 	
 	public void getCardMonth(ActionEvent e) {
@@ -98,7 +110,7 @@ public class ClientFormController implements Initializable {
 		int intCardYear = (int)cardYear.getValue();
 	}
 	
-	public void addCard() {
+	public void addCard(ActionEvent e) {
 		String clientFirstName = firstName.getText().trim();
 		String clientLastName = lastName.getText().trim();
 		if(clientFirstName.isBlank()||clientLastName.isBlank()) {
@@ -124,8 +136,18 @@ public class ClientFormController implements Initializable {
 		String cardCvv = cvv.getText();
 		String cardHolder = cardholder.getText();
 		
-		cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder,rentalService.getRental().getClient().getId());
-		//закрыть окно 
+		try {
+			cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder,rentalService.getCurrentRental().getClient().getId());
+		} catch (InvalidCreditCardNumberException | InvalidEmailException | InvalidClientDataException ex) {
+			ex.printStackTrace();
+			cardInsert.setText("Datas are not valid");
+			cardInsert.setStyle("-fx-text-fill: red;");
+			return;
+		}
+		//Закрываем окно карты, открываем договор!!! 
+		//new window
+		Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+		new ConfirmationForm().startConfirmationForm(currentStage, context);
 			
 	}
 	

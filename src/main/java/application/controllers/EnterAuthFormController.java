@@ -86,7 +86,7 @@ public class EnterAuthFormController implements Initializable {
 				try {
 					Client client = new Client(clientName, clientEmail, clientPhone);
 					Rental rental = new Rental(client);
-					rentalService.setRental(rental);
+					rentalService.setCurrentRental(rental);
 				} catch (Exception exep) {
 					System.out.println("The data is not valid: " + exep.getMessage());
 					inputInfoLabel.setText("The data is not valid");
