@@ -1,6 +1,6 @@
 package application.services;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import application.exceptions.CarUnavailableException;
 import application.exceptions.InvalidRentalDatesException;
@@ -18,7 +18,6 @@ import application.repositories.RentalRepository;
 public class RentalService {
     private RentalRepository rentalRepository; 
     private CarRepository carRepository; 
-    private Rental currentRental;
 
     /**
      * Constructs a new RentalService with the specified repositories.
@@ -47,7 +46,7 @@ public class RentalService {
      * @param startDate the start date of the rental period.
      * @param endDate   the end date of the rental period.
      */
-    public void createRentalRecord(Client client, Car car, LocalDate startDate, LocalDate endDate) {
+    public void createRentalRecord(Client client, Car car, Date startDate, Date endDate) {
         try {
             // Validate rental dates and car availability.
             ValidationService.validateRentalDates(startDate, endDate);
@@ -115,12 +114,4 @@ public class RentalService {
             System.err.println("Rental record not found (ID: " + rentalId + ")");
         }
     }
-
-	public Rental getRental() {
-		return currentRental;
-	}
-
-	public void setRental(Rental rental) {
-		this.currentRental = rental;
-	}
 }

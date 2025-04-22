@@ -1,5 +1,4 @@
 package application.repositories;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -47,21 +46,23 @@ public class RentalRepository implements Serializable {
         }
     }
 
-	/**
-	 * Retrieves a Rental record by its unique identifier.
-	 *
-	 * @param id the unique identifier of the Rental.
-	 * @return the Rental object matching the given id, or null if not found.
-	 */
-	public Rental getRentalById(int id) {
-		for (Rental rental : rentalList) {
-//			if (rental.getId() == id) 
-			{
-				return rental;
-			}
-		}
-		return null;
-	}
+    // не забываем, что ИД у нас стринг (2 буквы класса и 3 цифры). 
+    //Поиск по id - это по факту только инт (числовой номер) без букв.
+    
+    /**
+     * Retrieves a Rental record by its unique identifier.
+     *
+     * @param id the unique identifier of the Rental.
+     * @return the Rental object matching the given id, or null if not found.
+     */
+    public Rental getRentalById(int id) {
+        for (Rental rental : rentalList) {
+            if (rental.getId().equals(String.valueOf(id))) {
+                return rental;
+            }
+        }
+        return null;
+    }
 
     /**
      * Saves the current rental list to a file using serialization.
@@ -92,14 +93,19 @@ public class RentalRepository implements Serializable {
         }
     }
 
-	/**
-	 * Deletes a Rental record from the repository using its unique identifier.
-	 *
-	 * @param id the unique identifier of the Rental to be deleted.
-	 */
-	public void deleteRental(int id) {
-//TODO NOW!		rentalList.removeIf(rental -> rental.getId() == id);
-	}
+    /**
+     * Deletes a Rental record from the repository using its unique identifier.
+     *
+     * @param id the unique identifier of the Rental to be deleted.
+     */
+    public void deleteRental(int id) {
+        boolean removed = rentalList.removeIf(rental -> rental.getId().equals(String.valueOf(id)));
+        if (removed) {
+            System.out.println("Rental record with id " + id + " has been deleted.");
+        } else {
+            System.out.println("Rental record with id " + id + " not found.");
+        }
+    }
 
     /**
      * Retrieves the complete list of Rental records stored in the repository.

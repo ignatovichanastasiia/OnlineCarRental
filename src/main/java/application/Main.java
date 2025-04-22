@@ -21,12 +21,3 @@ public class Main extends Application {
 		launch(args);
 	}
 }
-
-
-/*
-CarSelectionForm csF = new CarSelectionForm();
-ClientForm cliF = new ClientForm();
-ConfirmationForm confF = new ConfirmationForm();
-RentalSummaryForm rentSF = new RentalSummaryForm();
-DriversLicenseForm drivLF = new DriversLicenseForm();
-*/

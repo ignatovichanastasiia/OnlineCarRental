@@ -1,5 +1,6 @@
 package application.models;
 
+
 import java.io.Serializable;
 
 import application.exceptions.InvalidClientDataException;

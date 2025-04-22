@@ -1,77 +1,129 @@
 package application.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class DriversLicense {
-	String taudatZehut;
-	String id;
-	LocalDate dateBirth;
-	char category;
-	LocalDate issue;
-	LocalDate expiration;
+import application.exceptions.InvalidClientDataException;
 
-	public DriversLicense(String number, String id, LocalDate dateBirth, LocalDate issue,
-			LocalDate expiration) {
-		this.taudatZehut = number;
-		this.id = id;
-		this.dateBirth = dateBirth;
-		this.category = 'B';
-		this.issue = issue;
-		this.expiration = expiration;
-	}
+/**
+ * Represents a driver's license with client identification,
+ * license number, birth date, category, issue date, and expiry date.
+ */
+public class DriversLicense implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-	public String getNumberTZ() {
-		return taudatZehut;
-	}
+    private String taudatZehut;
+    private String licenseNumber;
+    private LocalDate birthDate;
+    private char category;
+    private LocalDate issueDate;
+    private LocalDate expiryDate;
 
-	public void setNumberTZ(String number) {
-		this.taudatZehut = number;
-	}
+    /**
+     * Constructs a new DriversLicense with the provided details.
+     *
+     * @param taudatZehut   the client's Teudat Zehut number.
+     * @param licenseNumber the driver's license number.
+     * @param birthDate     the client's birth date.
+     * @param issueDate     the license issue date.
+     * @param expiryDate    the license expiry date.
+     * @throws InvalidClientDataException if any validation fails.
+     */
+    public DriversLicense(String taudatZehut, String licenseNumber, LocalDate birthDate, LocalDate issueDate, LocalDate expiryDate)
+            throws InvalidClientDataException {
+        setTaudatZehut(taudatZehut);
+        setLicenseNumber(licenseNumber);
+        setBirthDate(birthDate);
+        setCategory('B');
+        setIssueDate(issueDate);
+        setExpiryDate(expiryDate);
+    }
 
-	public String getId() {
-		return id;
-	}
+    public String getTaudatZehut() {
+        return taudatZehut;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setTaudatZehut(String taudatZehut) throws InvalidClientDataException {
+        if (taudatZehut == null || taudatZehut.trim().isEmpty()) {
+            throw new InvalidClientDataException("Teudat Zehut number cannot be null or empty.");
+        }
+        this.taudatZehut = taudatZehut;
+    }
 
-	public LocalDate getDateBirth() {
-		return dateBirth;
-	}
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
 
-	public void setDateBirth(LocalDate dateBirth) {
-		this.dateBirth = dateBirth;
-	}
+    public void setLicenseNumber(String licenseNumber) throws InvalidClientDataException {
+        if (licenseNumber == null || licenseNumber.trim().isEmpty()) {
+            throw new InvalidClientDataException("License number cannot be null or empty.");
+        }
+        this.licenseNumber = licenseNumber;
+    }
 
-	public char getCategory() {
-		return category;
-	}
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
-	public void setCategory(char ctegory) {
-		this.category = category;
-	}
+    public void setBirthDate(LocalDate birthDate) throws InvalidClientDataException {
+        if (birthDate == null) {
+            throw new InvalidClientDataException("Birth date cannot be null.");
+        }
+        if (birthDate.isAfter(LocalDate.now())) {
+            throw new InvalidClientDataException("Birth date cannot be in the future.");
+        }
+        this.birthDate = birthDate;
+    }
 
-	public LocalDate getIssue() {
-		return issue;
-	}
+    public char getCategory() {
+        return category;
+    }
 
-	public void setIssue(LocalDate issue) {
-		this.issue = issue;
-	}
+    /**
+     * Sets the license category.
+     * 
+     * @param category the license category.
+     * @throws InvalidClientDataException if the category is not a letter.
+     */
+    public void setCategory(char category) throws InvalidClientDataException {
+        if (!Character.isLetter(category)) {
+            throw new InvalidClientDataException("License category must be a letter.");
+        }
+        this.category = category;
+    }
 
-	public LocalDate getExpiration() {
-		return expiration;
-	}
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
 
-	public void setExpiration(LocalDate expiration) {
-		this.expiration = expiration;
-	}
+    public void setIssueDate(LocalDate issueDate) throws InvalidClientDataException {
+        if (issueDate == null) {
+            throw new InvalidClientDataException("Issue date cannot be null.");
+        }
+        this.issueDate = issueDate;
+    }
 
-	@Override
-	public String toString() {
-		return "DriverLicens [number=" + taudatZehut + ", id=" + id + ", dateBirth=" + dateBirth + ", category=" + category
-				+ ", issue=" + issue + ", expiration=" + expiration + "]";
-	}
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
 
+    public void setExpiryDate(LocalDate expiryDate) throws InvalidClientDataException {
+        if (expiryDate == null) {
+            throw new InvalidClientDataException("Expiry date cannot be null.");
+        }
+        if (this.issueDate != null && expiryDate.isBefore(this.issueDate)) {
+            throw new InvalidClientDataException("Expiry date cannot be before issue date.");
+        }
+        this.expiryDate = expiryDate;
+    }
+
+    @Override
+    public String toString() {
+        return "DriversLicense [taudatZehut=" + taudatZehut 
+                + ", licenseNumber=" + licenseNumber 
+                + ", birthDate=" + birthDate 
+                + ", category=" + category 
+                + ", issueDate=" + issueDate 
+                + ", expiryDate=" + expiryDate + "]";
+    }
 }

@@ -1,6 +1,12 @@
 package application.models;
 
-public class Card {
+import java.io.Serializable;
+
+public class Card implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String number;
 	String firstName;
 	String lastName;
@@ -79,6 +85,15 @@ public class Card {
 	public void setCardholder(String cardholder) {
 		this.cardholder = cardholder;
 	}
+	
+	public String getClientAppID() {
+		return clientAppID;
+	}
+	
+	public void setClientAppID(String clientAppID) {
+		this.clientAppID = clientAppID;
+	}
+	
 	@Override
 	public String toString() {
 		return "Card [number=" + number + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email

@@ -12,7 +12,7 @@
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
-        <javafx.version>21</javafx.version>
+        <javafx.version>24</javafx.version>
     </properties>
 
     <dependencies>

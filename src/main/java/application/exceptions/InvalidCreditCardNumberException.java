@@ -1,5 +1,6 @@
 package application.exceptions;
 
+
 /**
  * Thrown when the credit card number is invalid.
  */

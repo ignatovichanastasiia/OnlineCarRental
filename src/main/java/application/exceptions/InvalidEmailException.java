@@ -1,5 +1,6 @@
 package application.exceptions;
 
+
 /**
  * Custom exception thrown when an email address is invalid.
  */

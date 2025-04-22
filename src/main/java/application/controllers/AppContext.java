@@ -14,8 +14,6 @@ import application.services.ValidationService;
 
 public class AppContext {
 
-//	private final Connection connection;
-
 	private final CarRepository carRepository;
 	private final ClientRepository clientRepository;
 	private final RentalRepository rentalRepository;
@@ -30,34 +28,21 @@ public class AppContext {
 	private final CardService cardService;
 
 	public AppContext() {
-//TODO FOR GOOD TIME (DB)		try {
-			// TODO 
-//			H2 FOR GOOD TIME
-//			this.connection = DriverManager.getConnection("jdbc:h2:~/onlinecarrental", "sa", "");
+		// repo
+		this.carRepository = new CarRepository();
+		this.clientRepository = new ClientRepository();
+		this.rentalRepository = new RentalRepository();
+		this.shopRepository = new ShopRepository();
+		this.cardRepository = new CardRepository();
 
-			// repo
-			this.carRepository = new CarRepository();
-			this.clientRepository = new ClientRepository();
-			this.rentalRepository = new RentalRepository();
-			this.shopRepository = new ShopRepository();
-			this.cardRepository = new CardRepository();
-
-			// services
-			this.carService = new CarService(carRepository);
-			this.clientService = new ClientService(clientRepository);
-			this.rentalService = new RentalService(rentalRepository,carRepository);
-			this.shopService = new ShopService(shopRepository);
-			this.validationService = new ValidationService();
-			this.cardService = new CardService();
-			
-//		} catch (Exception e) {
-//			System.out.println("Problem in AppContext: "+e.getMessage());
-//		}
+		// services
+		this.carService = new CarService(carRepository);
+		this.clientService = new ClientService(clientRepository);
+		this.rentalService = new RentalService(rentalRepository, carRepository);
+		this.shopService = new ShopService(shopRepository);
+		this.validationService = new ValidationService();
+		this.cardService = new CardService();
 	}
-
-//	public Connection getConnection() {
-//		return connection;
-//	}
 
 	public CarRepository getCarRepository() {
 		return carRepository;
@@ -78,7 +63,7 @@ public class AppContext {
 	public CardRepository getCardRepository() {
 		return cardRepository;
 	}
-	
+
 	public CarService getCarService() {
 		return carService;
 	}
@@ -102,15 +87,4 @@ public class AppContext {
 	public CardService getCardService() {
 		return cardService;
 	}
-
-
-//	public void close() {
-//		try {
-//			if (connection != null && !connection.isClosed()) {
-//				connection.close();
-//			}
-//		} catch (SQLException e) {
-//			System.err.println("Error exiting data base: " + e.getMessage());
-//		}
-//	}
 }
