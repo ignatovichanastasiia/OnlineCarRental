@@ -138,12 +138,15 @@ public class ClientFormController implements Initializable {
 		
 		try {
 			cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder,rentalService.getCurrentRental().getClient().getId());
+			rentalService.getCurrentRental().getClient().setCreditCardNumber(strCardNumber);
+			context.getRentalRepository().updateRental(rentalService.getCurrentRental());
 		} catch (InvalidCreditCardNumberException | InvalidEmailException | InvalidClientDataException ex) {
 			ex.printStackTrace();
 			cardInsert.setText("Datas are not valid");
 			cardInsert.setStyle("-fx-text-fill: red;");
 			return;
 		}
+		
 		//Закрываем окно карты, открываем договор!!! 
 		//new window
 		Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();

@@ -27,9 +27,9 @@ public class Car implements Serializable {
 	 * @param model      the model of the car
 	 * @param year       the manufacturing year of the car
 	 * @param dailyPrice the daily rental price of the car
-	 * @param image      the URL or file path of the car's image
+	 * @param image      the URL or file path of the car's image - TODO
 	 */
-	public Car(String brand, String model, int year, double dailyPrice, String image) {
+	public Car(String brand, String model, int year, double dailyPrice) {
 		String className = getClass().getSimpleName();
 		String prefix = className.length() >= 2 ? className.substring(0, 2) : className;
 		// Generate the unique identifier in the format "Ca-001", "Ca-002", etc.
@@ -39,7 +39,7 @@ public class Car implements Serializable {
 		this.year = year;
 		this.dailyPrice = dailyPrice;
 		this.isAvailable = true; // By default, a new car is available.
-		this.image = image;
+//		this.image = image;
 	}
 
 	/**
@@ -161,18 +161,18 @@ public class Car implements Serializable {
 	 *
 	 * @return the image as a String
 	 */
-	public String getImage() {
-		return image;
-	}
-
-	/**
-	 * Sets the image path or URL of the car.
-	 *
-	 * @param image the image (URL or file path) to be set
-	 */
-	public void setImage(String image) {
-		this.image = image;
-	}
+//	public String getImage() {
+//		return image;
+//	}
+//
+//	/**
+//	 * Sets the image path or URL of the car.
+//	 *
+//	 * @param image the image (URL or file path) to be set
+//	 */
+//	public void setImage(String image) {
+//		this.image = image;
+//	}
 
 	/**
 	 * Returns a string representation of the car object, which includes its id,
@@ -183,6 +183,6 @@ public class Car implements Serializable {
 	@Override
 	public String toString() {
 		return "Car{" + "id='" + id + '\'' + ", brand='" + brand + '\'' + ", model='" + model + '\'' + ", year=" + year
-				+ ", dailyPrice=" + dailyPrice + ", isAvailable=" + isAvailable + ", image='" + image + '\'' + '}';
+				+ ", dailyPrice=" + dailyPrice + ", isAvailable=" + isAvailable + '\'' + '}';
 	}
 }

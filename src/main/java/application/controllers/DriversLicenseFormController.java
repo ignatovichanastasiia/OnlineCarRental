@@ -77,6 +77,7 @@ public class DriversLicenseFormController implements Initializable {
 		try {
 			driversLicenseService.createDriversLicense(taudatZehudNumber, strLicenseNumber, clientBirth, dateIssue,
 					dateExpir);
+			rentalService.getCurrentRental().getClient().setDriversLicenseNumber(strLicenseNumber);
 		} catch (Exception ex) {
 			System.out.println("Problem with license validation, data is not valid: " + ex.getMessage());
 			llicenseCheckLabel.setText("License is not valid");

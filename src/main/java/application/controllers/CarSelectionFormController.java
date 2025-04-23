@@ -374,6 +374,7 @@ public class CarSelectionFormController implements Initializable {
 				&&rental.getPickUpLocation()!=null
 				&&rental.getShop()!=null) {
 			
+			context.getRentalRepository().updateRental(rental);
 			//change window
 			Stage currentStage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 			new DriversLicenseForm().startDriversLicenseForm(currentStage, context);
