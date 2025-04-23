@@ -36,7 +36,7 @@
             <TextArea fx:id="carInfoArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextArea fx:id="extraInfoArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextArea fx:id="rentalTextArea" prefHeight="180.0" prefWidth="530.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextArea prefHeight="66.0" prefWidth="529.0" promptText="Warning prof and save rental information." GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextArea fx:id="saveInfoArea" prefHeight="66.0" prefWidth="529.0" promptText="Warning prof and save rental information." GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Label fx:id="infoLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="534.0" text="Confirm and save rental." GridPane.columnIndex="2">
                <font>
                   <Font name="System Bold" size="14.0" />

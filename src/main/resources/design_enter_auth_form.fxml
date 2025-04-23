@@ -55,6 +55,7 @@
                </image>
             </ImageView>
             <Label fx:id="leftEnterLabel" text="Enter your login and pass: " GridPane.columnIndex="1" />
+            <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="18.0" prefWidth="169.0" text="+" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>
