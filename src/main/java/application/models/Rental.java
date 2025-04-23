@@ -2,7 +2,6 @@ package application.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * The Rental class represents a rental transaction that ties a Client with a Car over a specified period.
@@ -92,7 +91,7 @@ public class Rental implements Serializable {
      *
      * @return the rental start Date.
      */
-    public Date getRentalStartDate() {
+    public LocalDate getRentalStartDate() {
         return rentalStartDate;
     }
     
