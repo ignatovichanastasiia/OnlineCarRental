@@ -1,9 +1,9 @@
 package application.GUI;
 
 import java.io.IOException;
-import java.net.URL;
 
 import application.controllers.AppContext;
+import application.controllers.ConfirmationFormController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,16 +11,21 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class ConfirmationForm {
-	
-	public void startConfirmationForm(Stage primaryStage,AppContext context) {
+
+	public void startConfirmationForm(Stage primaryStage, AppContext context) {
 		try {
-			URL fxmlUrl = getClass().getResource("/design_confirmation_form.fxml");
-			System.out.println("FXML URL: " + fxmlUrl);
-			Parent root = FXMLLoader.load(fxmlUrl);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_confirmation_form.fxml"));
+			System.out.println(loader.toString());
+			ConfirmationFormController controller = new ConfirmationFormController(context);
+
+			Parent root = loader.load();
+			System.out.println("THIS loader loaded: " + loader.getController());
+			System.out.println("Controller is: " + controller);
+
+			Scene scene = new Scene(root);
 			primaryStage.setTitle("Car rent app");
 			Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
 			primaryStage.getIcons().add(icon);
-			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 

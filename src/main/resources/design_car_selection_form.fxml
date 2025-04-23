@@ -121,7 +121,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                              <Label style="-fx-font-weight: bold; -fx-font-size: 14;" text="Additional Services:" GridPane.columnIndex="1" />
+                              <Label fx:id="coleteInfoLabel" style="-fx-font-weight: bold; -fx-font-size: 14;" text="Additional Services:" GridPane.columnIndex="1" />
 
                         <CheckBox fx:id="wifi" mnemonicParsing="false" text="Wi-Fi Router in the Car*" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                         <CheckBox fx:id="moreDriver" mnemonicParsing="false" text="Additional Driver*" GridPane.columnIndex="1" GridPane.rowIndex="4" />

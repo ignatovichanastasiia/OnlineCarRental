@@ -94,5 +94,11 @@ public class AppContext {
 		return cardService;
 	}
 
+	public DriversLicenseRepository getDriversLicenseRepository() {
+		return driversLicenseRepository;
+	}
 
+	public DriversLicenseService getDriversLicenseService() {
+		return driversLicenseService;
+	}
 }
