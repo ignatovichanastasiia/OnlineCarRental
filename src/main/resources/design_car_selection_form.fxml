@@ -55,8 +55,8 @@
                   <ChoiceBox fx:id="brand3" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                   <Label text="City*" GridPane.columnIndex="1" />
                   <Label text="Sale point*" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="dataFromLabel" text="Date from*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label fx:id="dataToLabel" text="Date to*" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Label fx:id="dateFromLabel" text="Date from*" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="dateToLabel" text="Date to*" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <Label text="Driving experience (full years)" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <ChoiceBox fx:id="drivingExperience" prefHeight="26.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <Label text="Car brand" GridPane.columnIndex="3" />
@@ -64,8 +64,8 @@
                   <Label text="Car brand 3" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                   <Label fx:id="minPriceLabel" text="Cars with price more than" GridPane.columnIndex="3" GridPane.rowIndex="6" />
                   <Label fx:id="maxPriceLabel" text="Cars with price low than" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-                  <TextField fx:id="minPriceTF" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                  <TextField fx:id="maxPriceTF" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                  <TextField fx:id="minPrice" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                  <TextField fx:id="maxPrice" GridPane.columnIndex="3" GridPane.rowIndex="9" />
                   <Label prefHeight="18.0" prefWidth="230.0" text="*Fields must be selected or filled in" GridPane.columnIndex="1" GridPane.rowIndex="10" />
 
                </children>

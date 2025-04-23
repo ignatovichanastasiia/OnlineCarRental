@@ -16,20 +16,20 @@ import application.services.ValidationService;
 
 public class AppContext {
 
-	private final CarRepository carRepository;
-	private final ClientRepository clientRepository;
-	private final RentalRepository rentalRepository;
-	private final ShopRepository shopRepository;
-	private final CardRepository cardRepository;
-	private final DriversLicenseRepository driversLicenseRepository;
+	private CarRepository carRepository;
+	private ClientRepository clientRepository;
+	private RentalRepository rentalRepository;
+	private ShopRepository shopRepository;
+	private CardRepository cardRepository;
+	private DriversLicenseRepository driversLicenseRepository;
 
-	private final CarService carService;
-	private final ClientService clientService;
-	private final RentalService rentalService;
-	private final ShopService shopService;
-	private final ValidationService validationService;
-	private final CardService cardService;
-	private final DriversLicenseService driversLicenseService;
+	private CarService carService;
+	private ClientService clientService;
+	private RentalService rentalService;
+	private ShopService shopService;
+	private ValidationService validationService;
+	private CardService cardService;
+	private DriversLicenseService driversLicenseService;
 
 	public AppContext() {
 		// repo

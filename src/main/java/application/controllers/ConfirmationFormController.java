@@ -44,7 +44,7 @@ public class ConfirmationFormController implements Initializable {
 			clickNextButton(ev);
 		});
 		
-		nextButton.setOnAction(ev -> {
+		backButton.setOnAction(ev -> {
 			System.out.println("Click to back!");
 			clickBackButton(ev);
 		});
@@ -56,6 +56,8 @@ public class ConfirmationFormController implements Initializable {
 			//change window
 			Stage currentStage = (Stage) ((Node) ev.getSource()).getScene().getWindow();
 			new RentalSummaryForm().startRentalSummaryForm(currentStage, context);
+		}else {
+			
 		}
 	}
 

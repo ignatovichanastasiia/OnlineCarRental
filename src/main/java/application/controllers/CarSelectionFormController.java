@@ -15,7 +15,6 @@ import application.repositories.CarRepository;
 import application.services.CarService;
 import application.services.RentalService;
 import application.services.ShopService;
-import application.services.ValidationService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +39,7 @@ public class CarSelectionFormController implements Initializable {
 	private CarService carService;
 	private ShopService shopService;
 	private RentalService rentalService;
+
 	
 	/***
 	 * The main window of the application. Consists of filters, 
@@ -52,11 +52,13 @@ public class CarSelectionFormController implements Initializable {
 	 * @param shopService
 	 * @param rentalService
 	 */
-	public CarSelectionFormController(AppContext context, CarService carService, ShopService shopService, RentalService rentalService) {
+	public CarSelectionFormController(AppContext context) {
+		System.out.println("THIS IS CONTEXT: "+context);
 		this.context = context;
-		this.carService = carService;
-		this.shopService = shopService;
-		this.rentalService = rentalService;
+		this.carService = context.getCarService();
+		this.shopService = context.getShopService();
+		this.rentalService = context.getRentalService();
+		this.carRepository = context.getCarRepository();
 	}
 
 	// Lists for Items
@@ -64,11 +66,11 @@ public class CarSelectionFormController implements Initializable {
 	private List<Car> researchedCarsBysecondBrand = new ArrayList<Car>();;
 	private List<Car> researchedCarsBythirdBrand = new ArrayList<Car>();;
 	private List<Car> allResearchedCarsByBrands = new ArrayList<Car>();
-	private List<Car> allCars = carService.listAvailableCars();
-	private List<String> citiesList = shopService.getAllShopsCitiesList();
-	private List<String> pointsAll = shopService.getAllShopsNames();
+	private List<Car> allCars;
+	private List<String> citiesList;
+	private List<String> pointsAll;
 	private List<String> cityPoints;
-	private List<String> brands = new ArrayList(carService.getCarBrands());
+	private List<String> brands;
 
 	// service object
 	private String brand;
@@ -99,13 +101,13 @@ public class CarSelectionFormController implements Initializable {
 	private ChoiceBox<String> points;
 
 	@FXML
-	private DatePicker dateFrom;
+	private DatePicker dateFrom; //!
 
 	@FXML
 	private Label dateFromLabel;
 
 	@FXML
-	private DatePicker dateTo;
+	private DatePicker dateTo;//!
 
 	@FXML
 	private Label dateToLabel;
@@ -171,6 +173,22 @@ public class CarSelectionFormController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		System.out.println("INIT WORKING");
+		
+		allCars = carService.listAvailableCars();
+		System.out.println(allCars.toString());
+		citiesList = shopService.getAllShopsCitiesList();
+		System.out.println(citiesList);
+		pointsAll = shopService.getAllShopsNames();
+		System.out.println(pointsAll);
+		brands = new ArrayList(carService.getCarBrands());
+		System.out.println(brands);
+		
+		
+	    if (carService == null) {
+	        System.out.println("WARNING: carService is null — skipping UI load.");
+	        return;
+	    }
 		//prepare accordion
 		accordion.setExpandedPane(filtersPane);
 		accordion.expandedPaneProperty().addListener((obs, oldPane, newPane) -> {
@@ -192,19 +210,22 @@ public class CarSelectionFormController implements Initializable {
 		ObservableList<String> citiesItems = FXCollections.observableArrayList(citiesList);
 		cities.setItems(citiesItems);
 		cities.setOnAction(this::getCitiesChoice);
+		
 		// prepare points CBox
 		ObservableList<String> pointsItems = FXCollections.observableArrayList(pointsAll);
 		points.setItems(pointsItems);
 		points.setOnAction(this::getPointsChoice);
+		
 		// prepare drivingExperience (drivingYears) CBox
 		ObservableList<String> driveYears = FXCollections
 				.observableArrayList(Arrays.asList("more than 2 years", "more than 3 years"));
 		drivingExperience.setItems(driveYears);
 		drivingExperience.setOnAction(this::getDrivingYearsChoice);
+		
 		// prepare brands CBox
-		List<String> brands1 = brands;
+		List<String> brands1 = new ArrayList(brands);
 		brands1.addFirst("All brands");
-		List<String> brands2 = brands;
+		List<String> brands2 = new ArrayList(brands);
 		brands2.addFirst("None");
 		ObservableList<String> brandFirstItems = FXCollections.observableArrayList(brands1);
 		brand1.setItems(brandFirstItems);
@@ -212,13 +233,20 @@ public class CarSelectionFormController implements Initializable {
 		brand1.setItems(brandFirstItems);
 		brand2.setItems(brandLastItems);
 		brand3.setItems(brandLastItems);
+		brand1.setOnAction(this::getFirstBrandsForSearch);
+		brand2.setOnAction(this::getSecondBrandsForSearch);
+		brand3.setOnAction(this::getThirdBrandForSearch);
+		
 		minPrice.setPromptText("Min price is " + carService.getMinPrice());
 		maxPrice.setPromptText("Max price is " + carService.getMaxPrice());
 		//prepare list of cars
 		carsList.setItems(FXCollections.observableArrayList(allCars));
 		//EXTRA
 		sb = new StringBuilder();
-		sb.append("Extra services: ");		
+		sb.append("Extra services: ");	
+		
+		dateFrom.setOnAction(this::getDateStartRental);
+		dateTo.setOnAction(this::getDateEndRental);
 		
 		 complete.setOnAction(ev -> {
 		        System.out.println("Click to complete!");
@@ -308,7 +336,9 @@ public class CarSelectionFormController implements Initializable {
 	public void getDateEndRental(ActionEvent e) {
 		localDateTo = dateTo.getValue();
 		try {
-			ValidationService.validateRentalDates(localDateFrom, localDateTo);
+			System.out.println("Validation is not work now");
+//			ValidationService.validateRentalDates(localDateFrom, localDateTo);
+			System.out.println("Dates! "+localDateFrom+", "+localDateTo);
 			rentalService.getCurrentRental().setRentalStartDate(localDateFrom);
 			rentalService.getCurrentRental().setRentalEndDate(localDateTo);
 		} catch (Exception exep) {
@@ -368,6 +398,7 @@ public class CarSelectionFormController implements Initializable {
 		rentalService.getCurrentRental().setPickUpLocation(sb.toString());
 		
 		Rental rental = rentalService.getCurrentRental();
+		System.out.println("This is RENTAL: "+rental.toString());
 		if(rental.getRentalStartDate()!=null
 				&&rental.getRentalEndDate()!=null
 				&&rental.getCar()!=null
@@ -380,7 +411,8 @@ public class CarSelectionFormController implements Initializable {
 			new DriversLicenseForm().startDriversLicenseForm(currentStage, context);
 			
 		}else {
-			coleteInfoLabel.setText("The required data or the selected machine is missing");
+			coleteInfoLabel.setText("The data or machine is missing");
+			coleteInfoLabel.setStyle("-fx-text-fill: red;");
 		    return;
 		}
 	}

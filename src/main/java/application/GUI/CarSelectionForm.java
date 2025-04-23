@@ -15,16 +15,13 @@ public class CarSelectionForm {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_car_selection_form.fxml"));
 			System.out.println(loader.toString());
-
-		    CarSelectionFormController controller = new CarSelectionFormController(
-		    		context, 
-		    		context.getCarService(),
-		    		context.getShopService(),
-		    		context.getRentalService());
+			System.out.println("App context: "+context.toString());
+		    CarSelectionFormController controller = new CarSelectionFormController(context);
+		    System.out.println("Controller is: " + controller);
 		    loader.setController(controller);
 		    Parent root = loader.load(); 
 		    System.out.println("THIS loader loaded: " + loader.getController());
-		    System.out.println("Controller is: " + controller);
+		    
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Car rent app");
 			Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
@@ -34,6 +31,7 @@ public class CarSelectionForm {
 
 		} catch (IOException e) {
 			System.err.println("Error opening CarSelectionForm: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

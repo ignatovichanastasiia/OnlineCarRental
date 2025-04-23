@@ -41,20 +41,38 @@ public class RentalSummaryFormController implements Initializable {
 	public RentalSummaryFormController(AppContext context) {
 		this.context = context;
 		this.rentalService = context.getRentalService();
+		this.currentRental = rentalService.getCurrentRental();
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		Rental currentRental = rentalService.getCurrentRental();
-		String carInfo = currentRental.getCar().toString();
+		String carInfo = new String();
+		if (currentRental.getCar() != null) {
+		    carInfo = currentRental.getCar().toString();
+		} else {
+			carInfo = "No car selected";
+		}
+
 		carInfoArea.setText(carInfo);
-		String extraInfo = currentRental.getPickUpLocation();
+		
+		String extraInfo = new String();
+		if (currentRental.getPickUpLocation() != null) {
+		    extraInfo = currentRental.getPickUpLocation();
+		} else {
+			extraInfo = "No extra selected";
+		}
 		extraInfoArea.setText(extraInfo);
+		
 		StringBuilder sb = new StringBuilder();
+		try{
 		sb.append("Rental information:\nName: " + currentRental.getClient().getName());
 		sb.append("\nPhone: " + currentRental.getClient().getPhone());
 		sb.append("\nEmail: " + currentRental.getClient().getEmail());
 		sb.append("\nLocation(shop point): " + currentRental.getShop());
+		}catch(Exception e) {
+			System.out.println("There ais no data");
+			sb.append("There ais no data");
+		}
 
 		String rentalInfo = sb.toString();
 		rentalTextArea.setText(rentalInfo);

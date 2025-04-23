@@ -9,9 +9,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import application.GUI.ConfirmationForm;
-import application.exceptions.InvalidClientDataException;
-import application.exceptions.InvalidCreditCardNumberException;
-import application.exceptions.InvalidEmailException;
 import application.services.CardService;
 import application.services.RentalService;
 import javafx.collections.FXCollections;
@@ -103,11 +100,11 @@ public class ClientFormController implements Initializable {
 	}
 	
 	public void getCardMonth(ActionEvent e) {
-		int intCardMonth = (int)cardMonth.getValue();
+		intCardMonth = (int)cardMonth.getValue();
 	}
 	
 	public void getCardYear(ActionEvent e) {
-		int intCardYear = (int)cardYear.getValue();
+		intCardYear = (int)cardYear.getValue();
 	}
 	
 	public void addCard(ActionEvent e) {
@@ -140,8 +137,8 @@ public class ClientFormController implements Initializable {
 			cardService.addCard(strCardNumber,clientFirstName,clientLastName,clientEmail, clientPhone,cardCvv,intCardMonth,intCardYear,cardHolder,rentalService.getCurrentRental().getClient().getId());
 			rentalService.getCurrentRental().getClient().setCreditCardNumber(strCardNumber);
 			context.getRentalRepository().updateRental(rentalService.getCurrentRental());
-		} catch (InvalidCreditCardNumberException | InvalidEmailException | InvalidClientDataException ex) {
-			ex.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println("Data is not valid: "+ex.getMessage());
 			cardInsert.setText("Datas are not valid");
 			cardInsert.setStyle("-fx-text-fill: red;");
 			return;

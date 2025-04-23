@@ -17,12 +17,12 @@
                <children>
 
                   <TextField fx:id="firstName" layoutX="14.0" layoutY="115.0" prefHeight="26.0" prefWidth="234.0" />
-                  <TextField fx:id="LastName" layoutX="301.0" layoutY="115.0" prefHeight="26.0" prefWidth="258.0" />
+                  <TextField fx:id="lastName" layoutX="301.0" layoutY="115.0" prefHeight="26.0" prefWidth="258.0" />
                   <TextField fx:id="emailFPart" layoutX="15.0" layoutY="185.0" prefHeight="26.0" prefWidth="48.0" />
                   <TextField fx:id="emailSPart" layoutX="79.0" layoutY="186.0" prefHeight="26.0" prefWidth="171.0" />
                   <TextField fx:id="phoneRegion" layoutX="307.0" layoutY="185.0" prefHeight="26.0" prefWidth="46.0" />
                   <TextField fx:id="phoneCode" layoutX="371.0" layoutY="185.0" prefHeight="26.0" prefWidth="46.0" />
-                  <TextField fx:id="phoneNunber" layoutX="435.0" layoutY="185.0" prefHeight="26.0" prefWidth="123.0" />
+                  <TextField fx:id="phoneNumber" layoutX="435.0" layoutY="185.0" prefHeight="26.0" prefWidth="123.0" />
                   <Label layoutX="303.0" layoutY="87.0" text="Last name" />
                   <Label layoutX="16.0" layoutY="158.0" text="E-mail" />
                   <Label fx:id="cardInsert" layoutX="15.0" layoutY="48.0" text="Card insert" />

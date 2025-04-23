@@ -12,13 +12,12 @@ import javafx.stage.Stage;
 
 public class EnterAuthForm {
 
-	public void startEnterAuthForm(Stage primaryStage)  {
+	public void startEnterAuthForm(Stage primaryStage,AppContext context)  {
 
 	    for (StackTraceElement ste : Thread.currentThread().getStackTrace()) {
 	        System.out.println(ste);
 	    }
 		try {
-			AppContext context = new AppContext(); // init
 		    FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_enter_auth_form.fxml"));
 		    System.out.println(loader.toString());
 		    EnterAuthFormController controller = new EnterAuthFormController(

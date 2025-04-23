@@ -17,7 +17,7 @@ public class ConfirmationForm {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/design_confirmation_form.fxml"));
 			System.out.println(loader.toString());
 			ConfirmationFormController controller = new ConfirmationFormController(context);
-
+			loader.setController(controller);
 			Parent root = loader.load();
 			System.out.println("THIS loader loaded: " + loader.getController());
 			System.out.println("Controller is: " + controller);

@@ -33,12 +33,13 @@ public class CarRepository implements Serializable {
 	private List<Car> carList;
 
 	public CarRepository() {
+		System.out.println("I'm CAR'S REPO. I'm here ");
 		ensureStorageExists();
 		carList = loadCarsFromFile();
 		if (carList == null) {
 			carList = new ArrayList<>();
-			carList =  createCarPool();
 		}
+		carList =  createCarPool();
 	}
 
 	public static List<Car> createCarPool() {

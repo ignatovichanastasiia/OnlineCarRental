@@ -24,6 +24,29 @@ public class ShopRepository {
         if (shopList == null) {
             shopList = new ArrayList<>();
         }
+        shopList = generateShops();
+    }
+    
+    public static List<Shop> generateShops() {
+        List<Shop> shops = new ArrayList<>();
+
+       try {
+        shops.add(new Shop("RentCenter TLV", "Tel Aviv", "Dizengoff 100"));
+        shops.add(new Shop("AutoRent North", "Haifa", "Herzl 45"));
+        shops.add(new Shop("Beachside Cars", "Bat Yam", "Ben Gurion 3"));
+        shops.add(new Shop("JeruDrive", "Jerusalem", "Jaffa 20"));
+        shops.add(new Shop("BeerSheva Wheels", "Be'er Sheva", "Derech Eilat 77"));
+        shops.add(new Shop("Ashdod Auto", "Ashdod", "HaTmarim 12"));
+        shops.add(new Shop("DriveIt Netanya", "Netanya", "Sderot Ben Tzvi 10"));
+        shops.add(new Shop("CarSpot Petah Tikva", "Petah Tikva", "Em Hamoshavot 88"));
+        shops.add(new Shop("Krayot Cars", "Kiryat Motzkin", "Hahistadrut 15"));
+        shops.add(new Shop("Modi'in AutoHub", "Modi'in", "Hahashmonaim 5"));
+       }catch(Exception e) {
+    	   System.out.println("Не прошли Ванену валидацию");
+    	   System.out.println("Shop or shops are not valid"+e.getMessage());
+       }
+
+        return shops;
     }
     
     public List<Shop> getAllShops() {

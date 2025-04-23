@@ -31,6 +31,7 @@ public class RentalSummaryForm {
 
 		} catch (IOException e) {
 			System.out.println("Problem with window \"rental summary form\": " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
