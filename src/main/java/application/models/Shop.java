@@ -1,6 +1,7 @@
 package application.models;
 
 import java.io.Serializable;
+
 import application.exceptions.InvalidShopDataException;
 import application.services.ValidationService;
 

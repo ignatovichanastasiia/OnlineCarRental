@@ -1,5 +1,6 @@
 package application.exceptions;
 
+
 /**
  * Exception thrown when client data is invalid.
  */

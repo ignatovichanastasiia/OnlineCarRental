@@ -1,11 +1,9 @@
 package application.services;
-
+import application.exceptions.InvalidClientDataException;
 import application.exceptions.InvalidCreditCardNumberException;
 import application.exceptions.InvalidEmailException;
-import application.exceptions.InvalidClientDataException;
 import application.models.Card;
 import application.repositories.CardRepository;
-import application.services.ValidationService;
 
 /**
  * CardService provides CRUD operations for Card objects.

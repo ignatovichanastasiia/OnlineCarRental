@@ -1,5 +1,6 @@
 package application.exceptions;
 
+
 /**
  * Thrown when the identity number (Teudat Zehut) is invalid.
  */

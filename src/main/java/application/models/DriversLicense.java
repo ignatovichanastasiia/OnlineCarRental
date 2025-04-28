@@ -2,6 +2,7 @@ package application.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
 import application.exceptions.InvalidClientDataException;
 
 /**

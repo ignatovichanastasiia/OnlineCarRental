@@ -1,10 +1,11 @@
 package application.services;
 
-import application.models.Shop;
-import application.repositories.ShopRepository;
-import application.exceptions.InvalidShopDataException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import application.exceptions.InvalidShopDataException;
+import application.models.Shop;
+import application.repositories.ShopRepository;
 
 /**
  * ShopService provides CRUD operations for Shop objects.
