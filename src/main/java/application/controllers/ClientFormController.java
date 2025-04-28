@@ -126,7 +126,7 @@ public class ClientFormController implements Initializable {
 		String clientEmail = email1+"@"+email2;
 		String clientPhone = phoneRegion.getText().trim()+phoneCode.getText().trim()+phoneNumber.getText().trim();
 		if(clientPhone.isBlank()||!clientPhone.matches("\\d{12}")) {
-			cardInsert.setText("Wrong phon number");
+			cardInsert.setText("Wrong phone number");
 			cardInsert.setStyle("-fx-text-fill: red;");
 			return;
 		}
@@ -139,7 +139,7 @@ public class ClientFormController implements Initializable {
 			context.getRentalRepository().updateRental(rentalService.getCurrentRental());
 		} catch (Exception ex) {
 			System.out.println("Data is not valid: "+ex.getMessage());
-			cardInsert.setText("Datas are not valid");
+			cardInsert.setText("Data is not valid");
 			cardInsert.setStyle("-fx-text-fill: red;");
 			return;
 		}

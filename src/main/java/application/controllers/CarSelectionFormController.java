@@ -277,7 +277,6 @@ public class CarSelectionFormController implements Initializable {
 		// TODO FOR GOOD TIME
 		System.out.println(
 				"DRIVE EXSP. There is no software logic behind this at the moment, \nbut in the future this choice may affect the availability of certain classes of cars.");
-
 	}
 
 	public void getFirstBrandsForSearch(ActionEvent e) {
@@ -447,7 +446,3 @@ public class CarSelectionFormController implements Initializable {
 	}
 }
 
-
-//Сгребла все данные, расшвыряла сеттерами, вместо открыла права,
-// вместо прав карту, открыла договор, заменила все на инфу! Оставила логин и пароль для клиента. 
-//По логину открываем инфу - ok -  энтер страница или новая рентал -  то окно выбора 
